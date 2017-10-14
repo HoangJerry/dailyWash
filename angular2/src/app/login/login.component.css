@@ -1,0 +1,77 @@
+.full-height {
+    height: 99vh;
+}
+
+.flex-center {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+.position-ref {
+    position: relative;
+}
+.main-background{
+	align-items: center;
+	display: flex;
+	width: 90%;
+	overflow: hidden;
+	margin: 2vh auto;
+	padding: 20px 15px;
+	box-shadow: 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12);
+    transform: translate3d(0,0,0);
+    transition: background .4s cubic-bezier(.25,.8,.25,1),box-shadow 280ms cubic-bezier(.4,0,.2,1);
+    background-color: rgba(255, 255, 255, 0.24);
+}
+.login-background{
+	box-shadow: 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12);
+	background-color: rgba(255, 255, 255, 0.61);
+	padding: 15px;
+}
+.full-height {
+    height: 100vh;
+}
+.full-width {
+  width: 100%;
+}
+.mat-button, .mat-icon-button, .mat-raised-button{
+	color:#FFF;
+
+}
+.clean-border{
+	border-radius:0px;
+	border:0px;
+}
+
+.title{
+	text-align: center;
+	font-size: 64px;
+	font-family: 'Princess Sofia', cursive;
+}
+.sologant{
+	padding-top: 20px;
+	font-size: 20px;
+	text-align: center;
+}
+.padding15{
+	margin-top:15px;
+}
+@media only screen and (max-width: 992px){
+	
+	.sologant{
+		font-size: 18px;
+		margin-bottom:20px;
+		text-align: center;
+	}
+	.title{
+		font-size: 54px;
+	}
+	.position-bottom-left{
+		margin-top: 20px;
+	}
+}
+
+@media only screen and (max-width: 768px){
+	.main-background{
+		display: block;
+	}
+}

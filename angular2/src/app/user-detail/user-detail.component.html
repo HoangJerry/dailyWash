@@ -1,0 +1,10 @@
+<div *ngIf="user">
+	<h2>{{user.email}} details!</h2>
+	<div><label>id: </label>{{user.id}}</div>
+	<div>
+		<label>name:</label>{{user.last_name}}{{user.first_name}}
+		<!-- <input [(ngModel)]="user.last_name" placeholder="name"> -->
+	</div>
+</div>
+
+<a routerLink="/admin/dashboard/">Back</a>

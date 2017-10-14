@@ -1,0 +1,24 @@
+<nav class="navbar navbar-default dark-primary-color clean-border-navbar " role="navigation">
+	<div class="container dark-primary-color">
+		<!-- Brand and toggle get grouped for better mobile display -->
+		<div class="navbar-header ">
+			<button type="button" class="btn btn-primary"
+					class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse"
+			        (click)="isCollapsed = !isCollapsed">
+			        <span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand logo-font" routerLink="/">daily Wash</a>
+		</div>
+		<div [collapse]="isCollapsed"
+		    class="collapse navbar-collapse navbar-ex1-collapse" >
+			<ul class="nav navbar-nav navbar-right">
+				<li><a routerLink="/dashboard">Home</a></li>		
+				<li><a [routerLink]="" (click)="onClickLogout($event)">Logout</a></li>
+
+			</ul>
+		</div><!-- /.navbar-collapse -->
+	</div>
+</nav>

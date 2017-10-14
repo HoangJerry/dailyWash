@@ -1,0 +1,24 @@
+<div class="full-height flex-center position-ref">
+  <div class="main-background">
+      <div class="col-sm-6 logo-background">
+        <h1 class="text-primary-color title">Daily Wash</h1>
+        <h1 class="text-primary-color sologant">Make the life faster and easier!</h1>
+      </div>
+      <div class="col-sm-6 login-background">
+        <form>
+          <md-form-field class="full-width">
+            <input mdInput [(ngModel)]="email" type="email" class="form-control" id="inputEmail" placeholder="Email" name = "email-login" >
+          </md-form-field>
+
+          <md-form-field class="full-width">
+            <input mdInput [(ngModel)]="password" type="password" class="form-control" id="inputPassword" placeholder="Password" name = "password-login">
+          </md-form-field>
+          <button md-button [style.display]="isRegister?'none':'block'" (click)="onClickLogin()" class="accent-color text-primary-color full-width">Sign in</button>
+          <button md-button [style.display]="isRegister?'block':'none'" (click)="onClickRegist()" class="accent-color text-primary-color full-width">Regist</button>
+
+          <p class="padding15">Dont have account! <a [routerLink]="" (click)="isRegister=!isRegister">Click me</a></p>
+          
+        </form>
+      </div>
+  </div>
+</div>

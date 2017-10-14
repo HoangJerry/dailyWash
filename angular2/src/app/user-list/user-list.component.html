@@ -1,0 +1,14 @@
+
+<p>
+  user-list works!
+</p>
+<ul>
+  <li *ngFor="let user of users">
+  <!-- <li *ngFor="let user of users" [routerLink]="['/admin/dashboard/detail']"> -->
+    <span class="red">{{user.id}}</span>
+    <span routerLink="/dashboard/detail/{{user.id}}">{{user.email}}</span>
+    <a href="" (click) = "delUser($event,user.id);">x</a>
+  </li>
+</ul>
+<!-- <app-user-detail [id]="selectedId"></app-user-detail> -->
+<router-outlet></router-outlet>

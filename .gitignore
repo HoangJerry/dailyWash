@@ -1,0 +1,4 @@
+/env
+/api/*.pyc
+/api/migrations
+/a2wp/node_modules
