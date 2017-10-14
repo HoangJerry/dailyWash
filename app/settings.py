@@ -195,13 +195,43 @@ AUTH_USER_MODEL = 'api.User'
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
-STATIC_URL = '/static/'
-MEDIA_URL = ''
+DEBUG = True
 
-# STATICFILES_DIRS = [
-#     os.path.join(BASE_DIR, 'static/'),
-#     #os.path.join(BASE_DIR, 'source'),
-# ]
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'dailywash$default',               
+        'USER': 'dailywash',
+        'PASSWORD': 'coca123@',
+        'HOST': 'dailywash.mysql.pythonanywhere-services.com',
+        'PORT': '',                     
+    }
+}
+
+MEDIA_ROOT = u'/home/dailywash/dailyWash/media'
+MEDIA_URL = '/media/'
+STATIC_ROOT = u'/home/dailywash/dailyWash/static'
+STATIC_URL = '/static/'
+
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'file': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': '/home/dailywash/dailyWash/cron_error.log',
+            },
+        },
+    'loggers': {
+        'django_crontab': {
+            'handlers': ['file'],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
+    },
+}
 
 try:
     from settings_local import *
