@@ -47,6 +47,9 @@ INSTALLED_APPS = [
     'constance',
     'corsheaders',
 
+    "categories",
+    "categories.editor",
+
     'unify_django',
     'django_crontab',
     
@@ -207,12 +210,6 @@ DATABASES = {
         'PORT': '',                     
     }
 }
-
-MEDIA_ROOT = u'/home/dailywash/dailyWash/media'
-MEDIA_URL = '/media/'
-STATIC_ROOT = u'/home/dailywash/dailyWash/static'
-STATIC_URL = '/static/'
-
 
 LOGGING = {
     'version': 1,

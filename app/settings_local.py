@@ -25,7 +25,7 @@ LOGGING = {
         'file': {
             'level': 'DEBUG',
             'class': 'logging.FileHandler',
-            'filename': '/var/www/html/HoangTN/blogAngularDjango/cron_error.log',
+            'filename': '/var/www/html/HoangTN/dailyWash/cron_error.log',
             # 'filename': '/var/www/html/prs/2017/merchant-wish-django/cron_error.log',
             },
         },

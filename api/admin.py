@@ -11,6 +11,7 @@ from models import *
 class UserResource(resources.ModelResource):
 	class Meta:
 		Model = User
+		# exclude = []
 		fields = ('id', 'first_name', 'last_name', 'email', 'gender')
     	export_order = fields
 
