@@ -13,7 +13,6 @@ export class AppService {
 
 	// API url:
     private apiUrl = 'http://dailywash.pythonanywhere.com/api';
-	// private apiUrl = '/api';
 
 	private headers = new Headers({'Content-Type': 'application/json'});
 

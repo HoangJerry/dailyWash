@@ -137,3 +137,16 @@ a, a:hover {
 .divider-color         { border-color: #BDBDBD; }
 
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+.full-height {
+    height: 99vh;
+}
+
+.flex-center {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+.position-ref {
+    position: relative;
+}
