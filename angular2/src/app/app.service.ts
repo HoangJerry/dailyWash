@@ -12,7 +12,7 @@ import 'rxjs/add/operator/map';
 export class AppService {
 
 	// API url:
-    private apiUrl = 'http://localhost:8000/api';
+    private apiUrl = 'http://dailywash.pythonanywhere.com/api';
 	// private apiUrl = '/api';
 
 	private headers = new Headers({'Content-Type': 'application/json'});

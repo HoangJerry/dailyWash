@@ -32,9 +32,11 @@ export class LoginComponent implements OnInit {
   }
   onClickRegister(e){
     e.preventDefault();
-    if (this.isRegister)
-       this.isRegister = false;
-    else
-      this.isRegister = true;
+    this.isRegister = !this.isRegister;
+    
+    // if (this.isRegister)
+    //    this.isRegister = false;
+    // else
+    //   this.isRegister = true;
   }
 }

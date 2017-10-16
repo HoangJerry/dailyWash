@@ -27,9 +27,9 @@ import { SideBarComponent } from './side-bar/side-bar.component';
 import { LoginComponent } from './login/login.component';
 
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {MdSelectModule} from '@angular/material';
-import {MdInputModule} from '@angular/material';
-import {MdButtonModule} from '@angular/material';
+import {MatSelectModule} from '@angular/material';
+import {MatInputModule} from '@angular/material';
+import {MatButtonModule} from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -51,9 +51,9 @@ import {MdButtonModule} from '@angular/material';
     BsDropdownModule.forRoot(),
     CollapseModule.forRoot(),
     BrowserAnimationsModule,
-    MdSelectModule,
-    MdInputModule,
-    MdButtonModule,
+    MatSelectModule,
+    MatInputModule,
+    MatButtonModule,
   ],
   providers: [
     AppService,
