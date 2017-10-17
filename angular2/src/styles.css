@@ -1,4 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
+*{
+    box-sizing: border-box;
+}
 html,
 body,
 div,
@@ -130,7 +133,7 @@ a, a:hover {
 .dark-primary-color    { background: #0097A7; }
 .default-primary-color { background: #00BCD4; }
 .light-primary-color   { background: #B2EBF2; }
-.text-primary-color    { color: #FFFFFF; }
+.text-primary-color    { color: #FFFFFF !important;}
 .accent-color          { background: #FF4081; }
 .primary-text-color    { color: #212121; }
 .secondary-text-color  { color: #757575; }

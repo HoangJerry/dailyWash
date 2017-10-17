@@ -1,15 +1,30 @@
 <div class="container">
 	<div class="row">
-		<div class="col-xs-12 col-sm-6 col-md-3 ">
-			<div class="background">
-				<img src="assets/jean.jpg" alt="" width="100%">
-			</div>
-		</div>
-		<div class="col-xs-12 col-sm-6 col-md-3 ">
-			<div class="background">
-				<img src="assets/Khan1.jpg" alt="" width="100%">
-			</div>
-		</div>
-	</div>
+		<!-- <div id="control-container"> -->
 
+			<div class="col-xs-12 col-sm-6">
+				<div class="background">
+					<div class="img-display">
+						<img src="assets/jean.jpg" alt="" width="100%">
+					</div>
+					<div class="select-btn text-primary-color">
+						<button (click) = "preOrder()" mat-button class="btn accent-color">Normal Clean</button>
+					</div>
+				</div>
+			</div>
+			
+			<div class="col-xs-12 col-sm-6">
+				<div class="background">
+					<div class="img-display">
+							<img src="assets/Khan1.jpg" alt="" width="100%">							
+					</div>
+					<div class="select-btn text-primary-color">
+						<button mat-button class="btn accent-color">Dry Clean</button>
+					</div>
+				</div>
+			</div>
+
+		<!-- </div> -->
+	</div>
 </div>
+

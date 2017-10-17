@@ -14,10 +14,7 @@
             <input matInput [(ngModel)]="password" type="password" class="form-control" id="inputPassword" placeholder="Password" name = "password-login">
           </mat-form-field>
           <button mat-button [style.display]="isRegister?'none':'block'" (click)="onClickLogin()" class="accent-color text-primary-color full-width">Sign in</button>
-          <button mat-button [style.display]="isRegister?'block':'none'" (click)="onClickRegist()" class="accent-color text-primary-color full-width">Regist</button>
-
-          <p class="padding15">Dont have account! <a [routerLink]="" (click)="isRegister=!isRegister">Click me</a></p>
-          
+  
         </form>
       </div>
   </div>

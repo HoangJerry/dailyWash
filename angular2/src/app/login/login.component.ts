@@ -27,16 +27,7 @@ export class LoginComponent implements OnInit {
                 this._auth.login(payload.token);
                 this._router.navigate(['/dashboard']);
 	            },
-	            (error:any) =>  this.errors = <any>error
+	            (error:any) =>  this.errors = error
 	        );
-  }
-  onClickRegister(e){
-    e.preventDefault();
-    this.isRegister = !this.isRegister;
-    
-    // if (this.isRegister)
-    //    this.isRegister = false;
-    // else
-    //   this.isRegister = true;
   }
 }

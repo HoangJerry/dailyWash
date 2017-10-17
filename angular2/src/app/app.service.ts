@@ -30,6 +30,7 @@ export class AppService {
                         .map((res:Response) => res.json())
                         .catch (this.handleError);
     }
+    
     public UserLogin(email,password){
         let url = this.apiUrl+'/user/login/';
         let data={
@@ -55,6 +56,20 @@ export class AppService {
                         .catch (this.handleError);
 	}
 
+    public CityData(){
+        let url = this.apiUrl + '/address/city/';
+        return this._http.get(url)
+                        .map((res:Response) => res.json())
+                        .catch (this.handleError);
+    }
+
+    public DistrictData(id){
+        let url = this.apiUrl + '/address/city/'+id+'/';
+        return this._http.get(url)
+                        .map((res:Response) => res.json())
+                        .catch (this.handleError);
+    }
+
 	private handleError(error: any): Promise<any> {
         console.error('An error occurred', error); // for demo purposes only
         return Promise.reject(error.message || error);
@@ -73,14 +88,17 @@ export class AuthService{
   login(token) : void {
     localStorage.setItem('token',token);
     this.isLoginSubject = true; 
+    
   }
 
   logout() : void {
     localStorage.removeItem('token');
     this.isLoginSubject = false;
+    localStorage.removeItem('body');
   }
 
   private hasToken() : void {
+    
     if (!localStorage.getItem('token')){
         this.isLoginSubject = false;
     }

@@ -30,6 +30,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatSelectModule} from '@angular/material';
 import {MatInputModule} from '@angular/material';
 import {MatButtonModule} from '@angular/material';
+import { UserOrderComponent } from './user-order/user-order.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import {MatButtonModule} from '@angular/material';
     SideBarComponent,
     LoginComponent,
     DashboardComponent,
+    UserOrderComponent,
   ],
   imports: [
     BrowserModule,
