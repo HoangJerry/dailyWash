@@ -20,7 +20,7 @@ class UserResource(resources.ModelResource):
     class Meta:
         Model = User
         # exclude = []
-        fields = ('id', 'first_name', 'last_name', 'email', 'gender','city')
+        fields = ('id', 'first_name', 'last_name', 'email', 'gender','city','phone')
         export_order = fields
 
 class UserAdmin(ExportActionModelAdmin,UnifyBaseUserAdmin):
@@ -31,12 +31,17 @@ class UserAdmin(ExportActionModelAdmin,UnifyBaseUserAdmin):
     fieldsets = (
         (None, {'fields': ('status', 'email','password')}),
         (_('Personal info'),
-         {'fields': ('first_name', 'last_name','city','district', 'avatar', 'fb_uid', 'gender',
+         {'fields': ('first_name', 'last_name','phone','city','district', 'avatar', 'fb_uid', 'gender',
                      'dob', 'about', 'relationship_status',)}),
         (_('Permissions'), {'fields': ('is_active', 'is_staff', 'is_superuser',
                                        'groups', 'user_permissions')}),
         (_('Important dates'), {'fields': ('last_login','date_joined')}),
     )
+
+class ProductAdmin(admin.ModelAdmin):
+    list_display = ('id','status','title','category','price')
+    list_editable = ('status',)
+
 class AddressAdmin(admin.ModelAdmin):
     list_display = ('id','name', '_link','active')
     fieldsets = (
@@ -49,9 +54,32 @@ class AddressAdmin(admin.ModelAdmin):
         link = str(obj.get_absolute_url()).title()[1:]
         return link.replace("/", ", ")
     _link.short_description = 'Full Category'
-    
+
+class CategoryAdmin(admin.ModelAdmin):
+    list_display = ('id','name','active')
+
+class OrderForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super(OrderForm, self).__init__(*args, **kwargs)
+        self.fields['user'].queryset = User.objects.exclude(is_wash_man=True,is_delivery_man=True)
+        self.fields['take_man'].queryset = User.objects.filter(is_delivery_man=True)
+        self.fields['wash_man'].queryset = User.objects.filter(is_wash_man=True)
+        self.fields['return_man'].queryset = User.objects.filter(is_delivery_man=True)
+
+class OrderAdmin(admin.ModelAdmin):
+    form = OrderForm
+    list_display = ('id','product','status','user','take_man','wash_man','return_man','total')
+    list_filter = ('status',)
+
+class SoftAdditionAdmin(admin.ModelAdmin):
+    list_display = ('name','price')
+
 # Register your models here.
 admin.site.register(User, UserAdmin)
+admin.site.register(Product, ProductAdmin)
 admin.site.register(Address,AddressAdmin)
+admin.site.register(Category,CategoryAdmin)
+admin.site.register(Order,OrderAdmin)
+admin.site.register(SoftAddition,SoftAdditionAdmin)
 
 

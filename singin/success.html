@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
+		<!-- font-family: 'Roboto', sans-serif; -->
+		<link href='styles/bootstrap.min.css' rel='stylesheet' type='text/css'>
+		<link href='styles/custom.css' rel='stylesheet' type='text/css'>
+		<link rel="stylesheet" type="text/css" href="styles/custom-media.css">
+		<script src='styles/jquery.js' type='text/javascript'></script>
+		<script src='styles/bootstrap.min.js' type='text/javascript'></script>
+	</head>
+	<body>
+
+    <div class="contentContainer contentSuccess">
+		<div class="container">
+			<div class="row">
+				<div class="ctn-success">
+					<!-- <img src="styles/images/succ-img.png"> -->
+					<div class="oval">
+						<span class=""><i class="material-icons">done</i></span>
+					</div>
+					<h3>Your account has been created !</h3>
+					<p>Please check your e-mail to verify your account</p>
+					<a href="index.html">Thank you</a>
+				</div>
+			</div>
+		</div>
+	</div> <!-- contentContainer -->
+
+	</body>
+
+	<script type="text/javascript">
+	$(document).ready(function() {
+	  $(".form").submit(function() {
+	    $(location).attr('href','google.com');
+	    return false;
+	  });
+	});
+
+	</script>
+</html>

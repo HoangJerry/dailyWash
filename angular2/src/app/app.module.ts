@@ -18,6 +18,7 @@ import { AppComponent }         from './app.component';
 import { UserDetailComponent }  from './user-detail/user-detail.component';
 import { UserListComponent }    from './user-list/user-list.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { UserOrderComponent } from './user-order/user-order.component';
 
 // Bootstraps
 import { BsDropdownModule } from 'ngx-bootstrap';
@@ -30,7 +31,8 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatSelectModule} from '@angular/material';
 import {MatInputModule} from '@angular/material';
 import {MatButtonModule} from '@angular/material';
-import { UserOrderComponent } from './user-order/user-order.component';
+import {MatDatepickerModule} from '@angular/material';
+
 
 @NgModule({
   declarations: [
@@ -56,6 +58,7 @@ import { UserOrderComponent } from './user-order/user-order.component';
     MatSelectModule,
     MatInputModule,
     MatButtonModule,
+    MatDatepickerModule,
   ],
   providers: [
     AppService,

@@ -7,6 +7,12 @@ class AddressSerializer(serializers.ModelSerializer):
         model = Address
         exclude = ['tree_id','rght','lft']
 
+class UserSignUpSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ('id', 'email', 'first_name', 'last_name','phone',
+            'city','district','street')
+
 class UserBaseSerializer(serializers.ModelSerializer):
     gender = serializers.SerializerMethodField('_gender')
 
@@ -37,4 +43,15 @@ class UserDetailSerializer(serializers.ModelSerializer):
         exclude = ['password']
     def _gender(self, obj):
         return obj.get_gender_display()
+
+
+class ProductSerializer(serializers.ModelSerializer):
+    class Meta():
+        model = Product
+
+class OrderNewSerializer(serializers.ModelSerializer):
+    product = ProductSerializer()
+    user = UserSignUpSerializer()
+    class Meta():
+        model = Order
 

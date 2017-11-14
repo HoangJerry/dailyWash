@@ -41,7 +41,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-
+    "categories",
+    "categories.editor",
+    
     'rest_framework',
     'rest_framework.authtoken',
     #'constance',
@@ -172,7 +174,7 @@ USE_TZ = True
 
 # APPEND_SLASH = False # if want to be direct link
 
-# SITE_URL = 'http://localhost:1234/'
+SITE_URL = 'dailywash.pythonanywhere.com'
 
 # STATIC_URL = SITE_URL + 'static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')

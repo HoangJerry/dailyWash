@@ -1,30 +1,36 @@
 <div class="container">
 	<div class="row">
-		<!-- <div id="control-container"> -->
-
-			<div class="col-xs-12 col-sm-6">
-				<div class="background">
-					<div class="img-display">
-						<img src="assets/jean.jpg" alt="" width="100%">
-					</div>
-					<div class="select-btn text-primary-color">
-						<button (click) = "preOrder()" mat-button class="btn accent-color">Normal Clean</button>
-					</div>
-				</div>
-			</div>
-			
-			<div class="col-xs-12 col-sm-6">
-				<div class="background">
-					<div class="img-display">
-							<img src="assets/Khan1.jpg" alt="" width="100%">							
-					</div>
-					<div class="select-btn text-primary-color">
-						<button mat-button class="btn accent-color">Dry Clean</button>
-					</div>
-				</div>
-			</div>
-
-		<!-- </div> -->
+		<div class="col-md-5">
+			<table id="customers">
+				<thead>
+					<tr>
+						<th>New</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr *ngFor="let new of news">
+						<td (click)="move(new.id)">{{new.user.first_name}} {{new.user.last_name}}
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div class="col-md-3">
+			<table id="customers">
+				<thead>
+					<tr>
+						<th>Your Pending</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr *ngFor="let new of news">
+						<td>{{new.user.first_name}} {{new.user.last_name}}
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
 	</div>
 </div>
+
 

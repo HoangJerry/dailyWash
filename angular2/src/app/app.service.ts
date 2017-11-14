@@ -12,7 +12,8 @@ import 'rxjs/add/operator/map';
 export class AppService {
 
 	// API url:
-    private apiUrl = 'http://dailywash.pythonanywhere.com/api';
+    // private apiUrl = 'http://dailywash.pythonanywhere.com/api';
+    private apiUrl = 'http://localhost:8000/api';
 
 	private headers = new Headers({'Content-Type': 'application/json'});
 
@@ -40,11 +41,25 @@ export class AppService {
         return this._http.post(url,data,{headers: this.headers})
                         // .map((res:Response) => res.json())
                         .catch (this.handleError);
+    }    
+
+    public TakingOrder(id){
+        let url = this.apiUrl+'/api/order/taking/';
+        let data={
+            order_id:id
+        }
+        let head = new Headers({'Content-Type': 'application/json'});
+        head.set('Authorization','Token '+localStorage.getItem('token')); 
+        return this._http.post(url,data,{headers: head})
+                        .map((res:Response) => res.json())
+                        .catch (this.handleError);
     }
 
     public UserDetail(id){
         let url = this.apiUrl+'/user/'+id+'/';
-        return this._http.get(url)
+        let head = new Headers({'Content-Type': 'application/json'});
+        head.set('Authorization','Token '+localStorage.getItem('token')); 
+        return this._http.get(url,{headers: head})
                         .map((res:Response) => res.json())
                         .catch (this.handleError);
     }
@@ -65,6 +80,13 @@ export class AppService {
 
     public DistrictData(id){
         let url = this.apiUrl + '/address/city/'+id+'/';
+        return this._http.get(url)
+                        .map((res:Response) => res.json())
+                        .catch (this.handleError);
+    }
+
+    public OrderNew(){
+        let url = this.apiUrl + '/order/new/';
         return this._http.get(url)
                         .map((res:Response) => res.json())
                         .catch (this.handleError);
@@ -111,7 +133,7 @@ export class AuthGuard implements CanActivate {
     constructor(private router: Router, private _auth:AuthService) { }
 
     canActivate() {
-         // not logged in so redirect to login page with the return url
+        // not logged in so redirect to login page with the return url
         if (!this._auth.isLoggedIn()) {
             this.router.navigate(['/login']);
             return false;

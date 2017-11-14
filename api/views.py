@@ -43,3 +43,48 @@ class UserLogin(generics.ListAPIView):
             return Response({'user': 'INVALID_PROFILE'}, status=status.HTTP_400_BAD_REQUEST)
         serializer = self.get_serializer(user)
         return Response(serializer.data)
+
+class Cities(generics.ListAPIView):
+    queryset = Address.objects.filter(active=True,parent__isnull=True)
+    serializer_class= AddressSerializer
+
+class Districts(generics.ListAPIView):
+    serializer_class= AddressSerializer
+    def get_queryset(self):
+        return Address.objects.filter(active=True,parent=self.kwargs['pk'])
+
+class EmailExist(APIView):
+    def get(self, request, format=None):
+        email = request.GET.get('email')
+        if User.objects.filter(email=email):
+            return Response(1)
+        return Response(0)
+
+class UserSignUp(generics.CreateAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSignUpSerializer
+
+class OrderNew(generics.ListAPIView):
+    queryset = Order.objects.filter(status=Order.DELIVERY_STATUS_NEW)
+    serializer_class = OrderNewSerializer
+
+class OrderTaking(generics.ListAPIView):
+    permission_classes = [permissions.IsAuthenticated]
+    serializer_class = OrderNewSerializer
+    # queryset = Order.objects
+
+    # def get_queryset(self):
+
+    #     return Order.objects.filter(take_man=self.request.user,status=Order.DELIVERY_STATUS_TAKING)
+
+    def post(self, request, format=None):
+        order = Order.objects.filter(id=request.DATA.get('order_id'))[0]
+        order.take_man = self.request.user
+        order.status = Order.DELIVERY_STATUS_TAKING
+        order.save()
+        serializer = self.get_serializer(order)
+        return Response(serializer.data)
+        # return super(OrderTaking, self).get_queryset()
+
+
+
