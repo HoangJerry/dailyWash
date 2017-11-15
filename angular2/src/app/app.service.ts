@@ -43,18 +43,6 @@ export class AppService {
                         .catch (this.handleError);
     }    
 
-    public TakingOrder(id){
-        let url = this.apiUrl+'/api/order/taking/';
-        let data={
-            order_id:id
-        }
-        let head = new Headers({'Content-Type': 'application/json'});
-        head.set('Authorization','Token '+localStorage.getItem('token')); 
-        return this._http.post(url,data,{headers: head})
-                        .map((res:Response) => res.json())
-                        .catch (this.handleError);
-    }
-
     public UserDetail(id){
         let url = this.apiUrl+'/user/'+id+'/';
         let head = new Headers({'Content-Type': 'application/json'});
@@ -88,6 +76,42 @@ export class AppService {
     public OrderNew(){
         let url = this.apiUrl + '/order/new/';
         return this._http.get(url)
+                        .map((res:Response) => res.json())
+                        .catch (this.handleError);
+    }
+
+    public OrderReturning(){
+        let url = this.apiUrl + '/order/returning/';
+        return this._http.get(url)
+                        .map((res:Response) => res.json())
+                        .catch (this.handleError);
+    }
+
+    public TakingOrder(id){
+        let url = this.apiUrl+'/order/taking/';
+        let data={
+            order_id:id
+        }
+        let head = new Headers({'Content-Type': 'application/json'});
+        head.set('Authorization','Token '+localStorage.getItem('token')); 
+        return this._http.post(url,data,{headers: head})
+                        .map((res:Response) => res.json())
+                        .catch (this.handleError);
+    }
+
+    public OrderMeTaking(){
+        let url = this.apiUrl + '/order/me/taking/';
+        let head = new Headers({'Content-Type': 'application/json'});
+        head.set('Authorization','Token '+localStorage.getItem('token')); 
+        return this._http.get(url,{headers: head})
+                        .map((res:Response) => res.json())
+                        .catch (this.handleError);
+    }
+    public OrderMeReturning(){
+        let url = this.apiUrl + '/order/me/returning/';
+        let head = new Headers({'Content-Type': 'application/json'});
+        head.set('Authorization','Token '+localStorage.getItem('token')); 
+        return this._http.get(url,{headers: head})
                         .map((res:Response) => res.json())
                         .catch (this.handleError);
     }

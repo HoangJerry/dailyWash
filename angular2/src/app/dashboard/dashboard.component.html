@@ -1,36 +1,78 @@
 <div class="container">
-	<div class="row">
-		<div class="col-md-5">
-			<table id="customers">
-				<thead>
-					<tr>
-						<th>New</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr *ngFor="let new of news">
-						<td (click)="move(new.id)">{{new.user.first_name}} {{new.user.last_name}}
-						</td>
-					</tr>
-				</tbody>
-			</table>
-		</div>
-		<div class="col-md-3">
-			<table id="customers">
-				<thead>
-					<tr>
-						<th>Your Pending</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr *ngFor="let new of news">
-						<td>{{new.user.first_name}} {{new.user.last_name}}
-						</td>
-					</tr>
-				</tbody>
-			</table>
+<div class="row">
+	<div class="col-md-8">
+		<div class="row">
+			<div class="col-md-8">
+				<table id="customers">
+					<thead>
+						<tr>
+							<th>New</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr *ngFor="let new of news">
+							<td (click)="move(new.id)">{{new.user.first_name}} {{new.user.last_name}}
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="col-md-4" #takingPending>
+				<table id="customers">
+					<thead>
+						<tr>
+							<th>Your Pending</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr *ngFor="let mytaking of mytakings">
+							<td>{{mytaking.user.first_name}} {{mytaking.user.last_name}}
+							</td>
+						</tr>
+					</tbody>
+					<tfoot>
+						<tr>
+							<th>Washing</th>
+						</tr>
+					</tfoot>
+				</table>
+			</div>
+			<div class="col-md-8">
+				<table id="customers">
+					<thead>
+						<tr>
+							<th>Returning</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr *ngFor="let returning of returnings">
+							<td (click)="move(new.id)">{{returning.user.first_name}} {{returning.user.last_name}}
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="col-md-4" #takingPending>
+				<table id="customers">
+					<thead>
+						<tr>
+							<th>Your Returning</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr *ngFor="let myreturning of myreturnings">
+							<td>{{myreturning.user.first_name}} {{myreturning.user.last_name}}
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
 		</div>
 	</div>
+	<div class="col-md-4">
+	
+	</div>
+</div>
 </div>
 
 

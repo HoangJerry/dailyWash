@@ -33,7 +33,7 @@ class UserAdmin(ExportActionModelAdmin,UnifyBaseUserAdmin):
         (_('Personal info'),
          {'fields': ('first_name', 'last_name','phone','city','district', 'avatar', 'fb_uid', 'gender',
                      'dob', 'about', 'relationship_status',)}),
-        (_('Permissions'), {'fields': ('is_active', 'is_staff', 'is_superuser',
+        (_('Permissions'), {'fields': ('is_active', 'is_staff','is_wash_man','is_delivery_man', 'is_superuser',
                                        'groups', 'user_permissions')}),
         (_('Important dates'), {'fields': ('last_login','date_joined')}),
     )

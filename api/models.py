@@ -80,7 +80,7 @@ class Order(models.Model):
     time_taking = models.SmallIntegerField(choices=TIME_COMING)
     time_return = models.SmallIntegerField(choices=TIME_COMING,null=True, blank=True)
     unit = models.FloatField(null=True, blank=True, help_text = _('Take man comfirm kg/unit'))
-    estimete_unit = models.FloatField(null=True, blank=True, help_text = _('User estimate there order'))
+    estimete_unit = models.FloatField(help_text = _('User estimate there order'))
     money = models.FloatField(null=True, blank=True)
     street_source = models.CharField(max_length=200,null=True, blank=True)
     street_destination = models.CharField(max_length=200,null=True, blank=True)
@@ -91,7 +91,9 @@ class Order(models.Model):
     def total(self):
         if self.unit:
             return self.unit*self.product.price
-        return self.estimete_unit*self.product.price
+        if self.estimete_unit:
+            return self.estimete_unit*self.product.price
+        return 0
 
 class Address(CategoryBase):
 

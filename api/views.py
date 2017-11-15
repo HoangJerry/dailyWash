@@ -68,6 +68,10 @@ class OrderNew(generics.ListAPIView):
     queryset = Order.objects.filter(status=Order.DELIVERY_STATUS_NEW)
     serializer_class = OrderNewSerializer
 
+class OrderReturning(generics.ListAPIView):
+    queryset = Order.objects.filter(status=Order.DELIVERY_STATUS_RETURNING,return_man__isnull=True)
+    serializer_class = OrderNewSerializer
+
 class OrderTaking(generics.ListAPIView):
     permission_classes = [permissions.IsAuthenticated]
     serializer_class = OrderNewSerializer
@@ -86,5 +90,15 @@ class OrderTaking(generics.ListAPIView):
         return Response(serializer.data)
         # return super(OrderTaking, self).get_queryset()
 
+class TakingPending(generics.ListAPIView):
+    queryset = Order.objects
+    serializer_class = OrderNewSerializer
+    def get_queryset(self):
+        return Order.objects.filter(take_man=self.request.user.id,status=Order.DELIVERY_STATUS_TAKING)
 
+class ReturningPending(generics.ListAPIView):
+    queryset = Order.objects
+    serializer_class = OrderNewSerializer
+    def get_queryset(self):
+        return Order.objects.filter(return_man=self.request.user.id,status=Order.DELIVERY_STATUS_RETURNING)
 

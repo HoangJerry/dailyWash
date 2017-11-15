@@ -2,6 +2,7 @@
     font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
     border-collapse: collapse;
     width: 100%;
+    margin-bottom: 20px;
 }
 
 #customers td, #customers th {
@@ -18,5 +19,12 @@
     padding-bottom: 12px;
     text-align: left;
     background-color: #4CAF50;
+    color: white;
+}
+#customers tfoot th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: red;
     color: white;
 }
