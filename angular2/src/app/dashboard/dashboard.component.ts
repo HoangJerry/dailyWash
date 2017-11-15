@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AppService }        from '../app.service';
 
-import { Router } from '@angular/router'
+import { Router, ActivatedRoute } from '@angular/router'
 
 @Component({
   selector: 'app-dashboard',
@@ -14,12 +14,29 @@ export class DashboardComponent implements OnInit {
   mytakings = [];
   returnings = [];
   myreturnings = [];
-  constructor(private route: Router,private _api: AppService) {
+  private fragment: string;
+
+  constructor(private route: Router,private _api: AppService,private activeRoute: ActivatedRoute) {
   }
 
   ngOnInit() {
     this.myPending();
+    this.activeRoute.fragment.subscribe(fragment => { 
+      this.fragment = fragment; 
+          try {
+      document.querySelector('#' + this.fragment).scrollIntoView();
+    } catch (e) { console.log(e)}
+
+    });
+
   }
+
+  ngAfterViewInit(): void {
+    try {
+      document.querySelector('#' + this.fragment).scrollIntoView();
+    } catch (e) { console.log(e)}
+  }
+
   myPending(){
     this._api.OrderNew()
             .subscribe(
