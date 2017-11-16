@@ -10,6 +10,7 @@ urlpatterns = [
 	url(r'^order/new/$', views.OrderNew.as_view(), name='order-new'),
 	url(r'^order/taking/$', views.OrderTaking.as_view(), name='order-taking'),
 	url(r'^order/returning/$', views.OrderReturning.as_view(), name='order-taking'),
+	url(r'^order/arrived/$', views.OrderArrived.as_view(), name='order-arrived'),
 	url(r'^order/me/taking/$', views.TakingPending.as_view(), name='order-taking'),
 	url(r'^order/me/returning/$', views.ReturningPending.as_view(), name='order-taking'),
 	url(r'^user/(?P<pk>[0-9]+)/$',views.UserDetailInformations.as_view(), name='user-detail'),
