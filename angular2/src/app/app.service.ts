@@ -31,6 +31,15 @@ export class AppService {
                         .map((res:Response) => res.json())
                         .catch (this.handleError);
     }
+
+    public WashManList(){
+        let url = this.apiUrl+'/user/washman/';
+        let head = new Headers({'Content-Type': 'application/json'});
+        head.set('Authorization','Token '+localStorage.getItem('token')); 
+        return this._http.get(url,{headers: head})
+                        .map((res:Response) => res.json())
+                        .catch (this.handleError);
+    }
     
     public UserLogin(email,password){
         let url = this.apiUrl+'/user/login/';
@@ -81,7 +90,7 @@ export class AppService {
     }
 
     public OrderReturning(){
-        let url = this.apiUrl + '/order/returning/';
+        let url = this.apiUrl + '/order/bewashed/';
         return this._http.get(url)
                         .map((res:Response) => res.json())
                         .catch (this.handleError);
@@ -89,6 +98,18 @@ export class AppService {
 
     public TakingOrder(id){
         let url = this.apiUrl+'/order/taking/';
+        let data={
+            order_id:id
+        }
+        let head = new Headers({'Content-Type': 'application/json'});
+        head.set('Authorization','Token '+localStorage.getItem('token')); 
+        return this._http.post(url,data,{headers: head})
+                        .map((res:Response) => res.json())
+                        .catch (this.handleError);
+    }
+
+    public ReturningOrder(id){
+        let url = this.apiUrl+'/order/returning/';
         let data={
             order_id:id
         }

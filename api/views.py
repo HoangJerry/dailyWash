@@ -31,6 +31,11 @@ class UserBaseInformations(generics.ListAPIView):
     queryset = User.objects.all()
     serializer_class = UserBaseSerializer
 
+class WashMan(generics.ListAPIView):
+    permission_classes = (permissions.IsAuthenticated,)
+    queryset = User.objects.filter(is_wash_man=True)
+    serializer_class = UserBaseSerializer
+
 
 class UserDetailInformations(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = UserDetailSerializer
@@ -86,7 +91,7 @@ class OrderNew(generics.ListAPIView):
     serializer_class = OrderNewSerializer
 
 
-class OrderReturning(generics.ListAPIView):
+class OrderBeWashed(generics.ListAPIView):
     queryset = Order.objects.filter(
         status=Order.DELIVERY_STATUS_RETURNING, return_man__isnull=True)
     serializer_class = OrderNewSerializer
@@ -112,7 +117,7 @@ class OrderTaking(generics.ListAPIView):
         # return super(OrderTaking, self).get_queryset()
 
 
-class OrderArrived(generics.ListAPIView):
+class OrderReturning(generics.ListAPIView):
     permission_classes = [permissions.IsAuthenticated]
     serializer_class = OrderNewSerializer
 
@@ -125,15 +130,15 @@ class OrderArrived(generics.ListAPIView):
                 order = Order.objects.filter(
                     id=request.DATA.get('order_id'))[0]
             except Exception, e:
-                print('Error class OrderArrived ', e)
+                print('Error class OrderReturning ', e)
                 return Response({'meassages': 'Not found order'}, status=status.HTTP_400_BAD_REQUEST)
-            order.take_man = self.request.user
-            order.status = Order.DELIVERY_STATUS_ARRIVED
+            order.return_man = self.request.user
+            # order.status = Order.DELIVERY_STATUS_ARRIVED
             order.save()
             serializer = self.get_serializer(order)
             return Response(serializer.data)
 
-        print('Error class OrderArrived')
+        print('Error class OrderReturning')
         raise ServiceUnavailable
 
 

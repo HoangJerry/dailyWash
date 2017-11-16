@@ -6,11 +6,13 @@
 }
 
 #customers td, #customers th {
-    border: 1px solid #ddd;
+    /*border: -1px solid #0097a7;*/
     padding: 8px;
+
 }
 
 #customers tr:nth-child(even){background-color: #f2f2f2;}
+#customers tr:nth-child(odd){background-color: #B2EBF2;}
 
 #customers tr:hover {background-color: #ddd;}
 
@@ -20,6 +22,7 @@
     text-align: left;
     background-color: #0097a7;
     color: white;
+    border: none;
 }
 #customers tfoot th {
     padding-top: 12px;
@@ -29,3 +32,11 @@
     color: white;
 }
 
+.modal-body select{
+    width: 50%;
+    background: none;
+    padding: 5px;
+    border-radius: 5px;
+    outline: none;
+
+}

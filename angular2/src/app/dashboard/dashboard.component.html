@@ -32,7 +32,7 @@
 					</tbody>
 					<tfoot>
 						<tr>
-							<th>Washing</th>
+							<th (click)="openModal(washman)" >Washing</th>
 						</tr>
 					</tfoot>
 				</table>
@@ -41,18 +41,18 @@
 				<table id="customers">
 					<thead>
 						<tr>
-							<th>Returning</th>
+							<th>Have Washed</th>
 						</tr>
 					</thead>
 					<tbody>
 						<tr *ngFor="let returning of returnings">
-							<td (click)="move(new.id)">{{returning.user.first_name}} {{returning.user.last_name}}
+							<td (click)="moveReturn(returning.id)">{{returning.user.first_name}} {{returning.user.last_name}}
 							</td>
 						</tr>
 					</tbody>
 				</table>
 			</div>
-			<div class="col-sm-4 col-xs-6" id="yourReturning">
+			<div class="col-sm-4 col-xs-6" id="returningPending">
 				<table id="customers">
 					<thead>
 						<tr>
@@ -78,3 +78,19 @@
 </div>
 
 
+<ng-template #washman>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Comfirm Wash Man</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+	  	<select>
+	    	<option *ngFor="let washMan of washMans" style="z-index: 10;" [value]="washMan.id">
+	      		{{ washMan.id }}
+	 		</option>
+	  	</select>
+
+  </div>
+</ng-template>

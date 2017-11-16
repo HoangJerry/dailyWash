@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { AppService }        from '../app.service';
-
+import { Component, OnInit, TemplateRef }  from '@angular/core';
+import { AppService,ChatService }         from '../app.service';
+import { BsModalService }     from 'ngx-bootstrap/modal';
+import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { Router, ActivatedRoute } from '@angular/router'
 
 @Component({
@@ -14,9 +15,19 @@ export class DashboardComponent implements OnInit {
   mytakings = [];
   returnings = [];
   myreturnings = [];
+  washMans = [];
   private fragment: string;
+  modalRef: BsModalRef;
 
-  constructor(private route: Router,private _api: AppService,private activeRoute: ActivatedRoute) {
+  constructor(
+    private route: Router,
+    private _api: AppService,
+    private _chat: ChatService,
+    private activeRoute: ActivatedRoute,
+    private modalService: BsModalService,) {
+  }
+  openModal(template: TemplateRef<any>) {
+    this.modalRef = this.modalService.show(template);
   }
 
   ngOnInit() {
@@ -38,6 +49,13 @@ export class DashboardComponent implements OnInit {
   }
 
   myPending(){
+    this._api.WashManList()
+          .subscribe(
+              (res:any) => {
+                this.washMans = res.results;
+              },
+              (error:any) =>  this.errors = error
+          );
     this._api.OrderNew()
             .subscribe(
               (res:any) => {
@@ -70,8 +88,19 @@ export class DashboardComponent implements OnInit {
               (error:any) =>  this.errors = error
           );
   }
+
   move(id){
     this._api.TakingOrder(id)
+              .subscribe(
+                        (res:any) => {
+                          this.myPending();
+                        },
+                        (error:any) =>  this.errors = error
+              );
+  }
+
+  moveReturn(id){
+    this._api.ReturningOrder(id)
               .subscribe(
                         (res:any) => {
                           this.myPending();

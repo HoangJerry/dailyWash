@@ -26,6 +26,7 @@ import { AlertModule } from 'ngx-bootstrap';
 import { CollapseModule } from 'ngx-bootstrap';
 import { SideBarComponent } from './side-bar/side-bar.component';
 import { LoginComponent } from './login/login.component';
+import { ModalModule } from 'ngx-bootstrap';
 
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatSelectModule} from '@angular/material';
@@ -33,7 +34,8 @@ import {MatInputModule} from '@angular/material';
 import {MatButtonModule} from '@angular/material';
 import {MatDatepickerModule} from '@angular/material';
 
-
+import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
+const config: SocketIoConfig = { url: 'http://localhost:8000', options: {} };
 @NgModule({
   declarations: [
     AppComponent,
@@ -59,6 +61,8 @@ import {MatDatepickerModule} from '@angular/material';
     MatInputModule,
     MatButtonModule,
     MatDatepickerModule,
+    ModalModule.forRoot(),
+    SocketIoModule.forRoot(config),
   ],
   providers: [
     AppService,
