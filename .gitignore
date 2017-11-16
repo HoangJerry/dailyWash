@@ -3,4 +3,4 @@
 /api/migrations
 /a2wp/node_modules
 /app/settings_local.py
-app/
+/app/
