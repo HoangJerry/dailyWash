@@ -31,6 +31,7 @@ class UserBaseInformations(generics.ListAPIView):
     queryset = User.objects.all()
     serializer_class = UserBaseSerializer
 
+
 class WashMan(generics.ListAPIView):
     permission_classes = (permissions.IsAuthenticated,)
     queryset = User.objects.filter(is_wash_man=True)
@@ -91,30 +92,80 @@ class OrderNew(generics.ListAPIView):
     serializer_class = OrderNewSerializer
 
 
-class OrderBeWashed(generics.ListAPIView):
-    queryset = Order.objects.filter(
-        status=Order.DELIVERY_STATUS_RETURNING, return_man__isnull=True)
-    serializer_class = OrderNewSerializer
-
-
 class OrderTaking(generics.ListAPIView):
     permission_classes = [permissions.IsAuthenticated]
     serializer_class = OrderNewSerializer
-    # queryset = Order.objects
-
-    # def get_queryset(self):
-
-    # return
-    # Order.objects.filter(take_man=self.request.user,status=Order.DELIVERY_STATUS_TAKING)
 
     def post(self, request, format=None):
-        order = Order.objects.filter(id=request.DATA.get('order_id'))[0]
-        order.take_man = self.request.user
-        order.status = Order.DELIVERY_STATUS_TAKING
-        order.save()
-        serializer = self.get_serializer(order)
-        return Response(serializer.data)
-        # return super(OrderTaking, self).get_queryset()
+        # check data in request
+        print(request.data)
+
+        if 'order_id' in request.data:
+
+            # check order_id pass database
+            try:
+                order = Order.objects.filter(
+                    id=request.DATA.get('order_id'))[0]
+            except Exception, e:
+                print('Error class OrderTaking ', e)
+                return Response({'meassages': 'Not found order'}, status=status.HTTP_400_BAD_REQUEST)
+            order.return_man = self.request.user
+            order.status = Order.DELIVERY_STATUS_TAKING
+            order.save()
+            serializer = self.get_serializer(order)
+            return Response(serializer.data)
+
+        print('Error class OrderTaking')
+        raise ServiceUnavailable
+
+
+class OrderWashing(generics.ListAPIView):
+    permission_classes = [permissions.IsAuthenticated]
+    serializer_class = OrderNewSerializer
+
+    def post(self, request, format=None):
+        # check data in request
+        if 'order_id' in request.data:
+
+            # check order_id pass database
+            try:
+                order = Order.objects.filter(
+                    id=request.DATA.get('order_id'))[0]
+            except Exception, e:
+                print('Error class OrderWashing ', e)
+                return Response({'meassages': 'Not found order'}, status=status.HTTP_400_BAD_REQUEST)
+            order.wash_man = self.request.user
+            order.status = Order.DELIVERY_STATUS_WASHING
+            order.save()
+            serializer = self.get_serializer(order)
+            return Response(serializer.data)
+
+        print('Error class OrderWashing')
+        raise ServiceUnavailable
+
+
+class OrderWashed(generics.ListAPIView):
+    permission_classes = [permissions.IsAuthenticated]
+    serializer_class = OrderNewSerializer
+
+    def post(self, request, format=None):
+        # check data in request
+        if 'order_id' in request.data:
+
+            # check order_id pass database
+            try:
+                order = Order.objects.filter(
+                    id=request.DATA.get('order_id'))[0]
+            except Exception, e:
+                print('Error class OrderWashed ', e)
+                return Response({'meassages': 'Not found order'}, status=status.HTTP_400_BAD_REQUEST)
+            order.status = Order.DELIVERY_STATUS_WASHED
+            order.save()
+            serializer = self.get_serializer(order)
+            return Response(serializer.data)
+
+        print('Error class OrderWashed')
+        raise ServiceUnavailable
 
 
 class OrderReturning(generics.ListAPIView):
@@ -133,13 +184,43 @@ class OrderReturning(generics.ListAPIView):
                 print('Error class OrderReturning ', e)
                 return Response({'meassages': 'Not found order'}, status=status.HTTP_400_BAD_REQUEST)
             order.return_man = self.request.user
-            # order.status = Order.DELIVERY_STATUS_ARRIVED
+            order.status = Order.DELIVERY_STATUS_RETURNING
             order.save()
             serializer = self.get_serializer(order)
             return Response(serializer.data)
 
         print('Error class OrderReturning')
         raise ServiceUnavailable
+
+
+class OrderArrived(generics.ListAPIView):
+    permission_classes = [permissions.IsAuthenticated]
+    serializer_class = OrderNewSerializer
+
+    def post(self, request, format=None):
+        # check data in request
+        if 'order_id' in request.data:
+
+            # check order_id pass database
+            try:
+                order = Order.objects.filter(
+                    id=request.DATA.get('order_id'))[0]
+            except Exception, e:
+                print('Error class OrderArrived ', e)
+                return Response({'meassages': 'Not found order'}, status=status.HTTP_400_BAD_REQUEST)
+            order.return_man = self.request.user
+            order.status = Order.DELIVERY_STATUS_ARRIVED
+            order.save()
+            serializer = self.get_serializer(order)
+            return Response(serializer.data)
+
+        print('Error class OrderArrived')
+        raise ServiceUnavailable
+
+
+class OrderAllArrived(generics.ListAPIView):
+    queryset = Order.objects.filter(status=Order.DELIVERY_STATUS_ARRIVED)
+    serializer_class = OrderNewSerializer
 
 
 class TakingPending(generics.ListAPIView):
