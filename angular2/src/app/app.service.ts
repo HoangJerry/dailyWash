@@ -12,23 +12,36 @@ import { Socket } from 'ngx-socket-io';
  
 @Injectable()
 export class ChatService {
+    
+    constructor(private socket: Socket) { 
+        console.log("here");
+        this.socket.on('chat', () => {
+           console.log('connected'); 
+        });
+    }
  
-    constructor(private socket: Socket) { }
- 
+    
+
     sendMessage(msg: string){
-        this.socket.emit("message", msg);
+        this.socket.emit("/chat", msg);
     }
     
     getMessage() {
         return this.socket
-            .fromEvent("message")
-            .map( data => data.msg );
+            .fromEvent("/chat")
+            .map((data:any) => {data.msg.json();console.log(data);} );
     }
+
+    // close() {
+    //     this.socket.disconnect()
+    // }
 }
+
 @Injectable()
 export class AppService {
-
-	// API url:
+    private _router: Router; 
+    private _auth:AuthService;
+    // API url:
     // private apiUrl = 'http://dailywash.pythonanywhere.com/api';
     private apiUrl = 'http://localhost:8000/api';
 
@@ -39,6 +52,8 @@ export class AppService {
         // this.headers.append('Content-Type', 'application/x-www-form-urlencoded');
         // this.headers.append('X-Requested-With', 'XMLHttpRequest');
         // this.headers.append('token', 'abc'); 
+        
+    // API url:
     }
 
     public UserList(){
@@ -155,6 +170,8 @@ export class AppService {
     }
 
 	private handleError(error: any): Promise<any> {
+        this._auth.logout();
+        this._router.navigate(['/login']);
         console.error('An error occurred', error); // for demo purposes only
         return Promise.reject(error.message || error);
     }

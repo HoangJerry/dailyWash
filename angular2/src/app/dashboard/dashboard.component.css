@@ -31,7 +31,21 @@
     background-color: red;
     color: white;
 }
-
+.modal-body {
+    overflow: hidden;
+}
+.modal-body button{
+    background-color: red;
+    color: white;
+    font-weight: 800;
+    outline: none;
+    border: none;
+}
+.modal-body .but-place{
+    display: block;
+    margin: 30px 0px;
+    float: right;
+}
 .modal-body select{
     width: 50%;
     background: none;

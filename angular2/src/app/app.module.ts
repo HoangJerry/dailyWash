@@ -12,6 +12,7 @@ import { routes }           from './routing.module';
 import { AppService }           from './app.service';
 import { AuthService }           from './app.service';
 import { AuthGuard }           from './app.service';
+import { ChatService }           from './app.service';
 
 // Component
 import { AppComponent }         from './app.component';
@@ -35,7 +36,8 @@ import {MatButtonModule} from '@angular/material';
 import {MatDatepickerModule} from '@angular/material';
 
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
-const config: SocketIoConfig = { url: 'http://localhost:8000', options: {} };
+const config: SocketIoConfig = { url: 'ws://localhost:8000/', options: {} };
+// const config: SocketIoConfig = { url: 'wss://streamer.cryptocompare.com/', options: {} };
 @NgModule({
   declarations: [
     AppComponent,
@@ -68,6 +70,7 @@ const config: SocketIoConfig = { url: 'http://localhost:8000', options: {} };
     AppService,
     AuthService,
     AuthGuard,
+    ChatService,
   ],
   // enableProdMode, 
   bootstrap: [AppComponent]

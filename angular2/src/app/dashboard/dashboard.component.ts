@@ -18,7 +18,14 @@ export class DashboardComponent implements OnInit {
   washMans = [];
   private fragment: string;
   modalRef: BsModalRef;
+  selectedValue:any;
 
+  onChangeWashMan(newObj) {
+    console.log(newObj);
+    this.selectedValue = newObj;
+    console.log(this.selectedValue.first_name)
+    // ... do other stuff here ...
+  }
   constructor(
     private route: Router,
     private _api: AppService,
@@ -53,6 +60,7 @@ export class DashboardComponent implements OnInit {
           .subscribe(
               (res:any) => {
                 this.washMans = res.results;
+                console.log(this.washMans);
               },
               (error:any) =>  this.errors = error
           );

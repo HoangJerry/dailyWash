@@ -156,3 +156,17 @@ class ReturningPending(generics.ListAPIView):
 
     def get_queryset(self):
         return Order.objects.filter(return_man=self.request.user.id, status=Order.DELIVERY_STATUS_RETURNING)
+
+from socketio.namespace import BaseNamespace
+from socketio import socketio_manage
+
+class ChatNamespace(BaseNamespace):
+
+    def on_user_msg(self, msg):
+        print "hererer"
+        self.emit('user_msg', msg)
+
+def socketio_service(request):
+    socketio_manage(request.environ, {'': ChatNamespace}, request)
+    return 'out'
+
