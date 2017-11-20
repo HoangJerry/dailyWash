@@ -19,7 +19,7 @@ class UserBaseSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ('id', 'username', 'email', 'first_name', 'last_name',
-            'gender', 'avatar',)
+            'gender', 'avatar','is_wash_man','is_delivery_man')
         
     def _gender(self, obj):
         return obj.get_gender_display()

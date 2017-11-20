@@ -128,12 +128,12 @@ table {
     border-spacing: 0;
 }
 a, a:hover {
-    color: #fff !important;
+    color: #fff;
 }
 .dark-primary-color    { background: #0097A7; }
 .default-primary-color { background: #00BCD4; }
 .light-primary-color   { background: #B2EBF2; }
-.text-primary-color    { color: #FFFFFF !important;}
+.text-primary-color    { color: #FFFFFF;}
 .accent-color          { background: #FF4081; }
 .primary-text-color    { color: #212121; }
 .secondary-text-color  { color: #757575; }

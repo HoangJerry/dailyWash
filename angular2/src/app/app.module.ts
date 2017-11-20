@@ -12,7 +12,6 @@ import { routes }           from './routing.module';
 import { AppService }           from './app.service';
 import { AuthService }           from './app.service';
 import { AuthGuard }           from './app.service';
-import { ChatService }           from './app.service';
 
 // Component
 import { AppComponent }         from './app.component';
@@ -20,6 +19,11 @@ import { UserDetailComponent }  from './user-detail/user-detail.component';
 import { UserListComponent }    from './user-list/user-list.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { UserOrderComponent } from './user-order/user-order.component';
+import { DashboardWashComponent } from './dashboard-wash/dashboard-wash.component';
+import { DashboardMainComponent } from './dashboard-main/dashboard-main.component';
+import { HeaderComponent } from './header/header.component';
+import { FooterComponent } from './footer/footer.component';
+
 
 // Bootstraps
 import { BsDropdownModule } from 'ngx-bootstrap';
@@ -36,6 +40,7 @@ import {MatButtonModule} from '@angular/material';
 import {MatDatepickerModule} from '@angular/material';
 
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
+import { HomeComponent } from './home/home.component';
 const config: SocketIoConfig = { url: 'ws://localhost:8000/', options: {} };
 // const config: SocketIoConfig = { url: 'wss://streamer.cryptocompare.com/', options: {} };
 @NgModule({
@@ -47,6 +52,11 @@ const config: SocketIoConfig = { url: 'ws://localhost:8000/', options: {} };
     LoginComponent,
     DashboardComponent,
     UserOrderComponent,
+    DashboardWashComponent,
+    HomeComponent,
+    DashboardMainComponent,
+    HeaderComponent,
+    FooterComponent,
   ],
   imports: [
     BrowserModule,
@@ -64,13 +74,12 @@ const config: SocketIoConfig = { url: 'ws://localhost:8000/', options: {} };
     MatButtonModule,
     MatDatepickerModule,
     ModalModule.forRoot(),
-    SocketIoModule.forRoot(config),
+    // SocketIoModule.forRoot(config),
   ],
   providers: [
     AppService,
     AuthService,
     AuthGuard,
-    ChatService,
   ],
   // enableProdMode, 
   bootstrap: [AppComponent]

@@ -27,7 +27,7 @@ class ServiceUnavailable(APIException):
 
 
 class UserBaseInformations(generics.ListAPIView):
-    permission_classes = (permissions.IsAuthenticated,)
+    # permission_classes = (permissions.IsAuthenticated,)
     queryset = User.objects.all()
     serializer_class = UserBaseSerializer
 

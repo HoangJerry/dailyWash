@@ -1,0 +1,90 @@
+p,a{
+	font-size: 16px;
+}
+
+/*------headerContainer------*/
+.headerContainer{
+	padding: 15px 0;
+	width: 100%;
+	/* position: fixed; */
+	top: 0;
+	z-index: 999;
+	background: #fff;
+	overflow: hidden;
+	border-bottom: 1px solid #c8c6c9;
+}
+#logo{
+	padding: 0;
+}
+#logo img{
+	width: 42px;
+	/*height: 42px;*/
+	/*background: url(images/logo.png) transparent no-repeat 0 0;*/
+	display: block;
+	padding: 0;
+}
+.mainNavRight {
+	padding-top: 6px;
+}
+.navbar {
+	margin: 0;
+	min-height: 36px;
+	background: none;
+	border: 0;
+}
+.navbar .nav>li {
+	float: left;
+}
+.headerContainer .navbar ul.nav > li > a {
+	font-size: 14px;
+	color: #4a4a4a;
+	text-decoration: none;
+	line-height: 31px;
+	padding: 5px 21px;
+	text-transform: uppercase;
+	font-weight: normal;
+}
+.headerContainer .navbar ul.nav > li > a:hover{
+	color: #ee3967;
+}
+.navbar .navbar-collapse{}
+.navbar .navbar-collapse >ul>li>a.login{
+	margin-right: 17px;
+	padding: 5px 40px;
+	min-height: 30px;
+	color: #4a4a4a;
+}
+.navbar .navbar-collapse >ul>li>a.signup{
+	padding: 3px 70px;
+	border: 1px solid #ee3967;
+	color: #ee3967;
+	border-radius: 30px;
+}
+.navbar .navbar-collapse >ul>li>a.login:hover{
+	color: #ee3967;
+}
+.navbar .navbar-collapse >ul>li>a.signup:hover{
+	color: #fff;
+	background: #f42156;
+	border: 1px solid #f42156;
+}
+.nav>li>a:hover, .nav>li>a:focus{
+	background: none;
+}
+.affix-top{
+	background: none;
+	border-bottom: 0;
+
+}
+.affix-top .navbar ul.nav > li > a {
+	color: #fff;
+}
+.affix-top .navbar .navbar-collapse >ul>li>a.signup:hover{
+	color: #fff;
+
+}
+
+.navbar-default .navbar-toggle .icon-bar{
+	background-color: #000;
+}
+

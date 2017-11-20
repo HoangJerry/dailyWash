@@ -1,11 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,ViewEncapsulation } from '@angular/core';
 import { Router }       from '@angular/router';
 import { AuthService }      from '../app.service';
 
 @Component({
   selector: 'app-side-bar',
   templateUrl: './side-bar.component.html',
-  styleUrls: ['./side-bar.component.css']
+  styleUrls: ['./side-bar.component.css'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class SideBarComponent implements OnInit {
   	toogle=0

@@ -1,0 +1,25 @@
+<div class="headerContainer navbar-fixed-top" data-spy="affix" data-offset-top="250">
+	<div class="container">
+		<nav class="headerBotContainer navbar navbar-default">
+			<div class="ctn-container">
+				<div class="navbar-header collapsed col-md-2 col-sm-2 ">
+					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavba" (click)="isCollapsed = !isCollapsed">
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<a href="" title="" id="logo" class="navbar-brand"><img src="" alt="home"></a>
+				</div>
+				<div [collapse]="isCollapsed" class="navbar-collapse collapse col-md-10 col-sm-10 navbar-right" id="myNavba">
+					<ul class="nav navbar-nav">
+						<li><a href="#">clients</a></li>
+						<li><a href="#">features</a></li>
+						<li><a href="#">help</a></li>
+						<li class="rf-logi"><a  class="login">Logout</a></li>
+						<li class="rf-logi"><a [routerLink]="" (click)="onClickLogout($event)" class="signup">Log out</a></li>
+					</ul>
+				</div>
+			</div>
+		</nav> 
+	</div>
+</div>

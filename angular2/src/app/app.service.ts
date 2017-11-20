@@ -8,34 +8,34 @@ import { Observer }                 from 'rxjs/Observer';
 import 'rxjs/Rx';
 import 'rxjs/add/operator/map';
 
-import { Socket } from 'ngx-socket-io';
+// import { Socket } from 'ngx-socket-io';
  
-@Injectable()
-export class ChatService {
+// @Injectable()
+// export class ChatService {
     
-    constructor(private socket: Socket) { 
-        console.log("here");
-        this.socket.on('chat', () => {
-           console.log('connected'); 
-        });
-    }
+//     constructor(private socket: Socket) { 
+//         console.log("here");
+//         this.socket.on('chat', () => {
+//            console.log('connected'); 
+//         });
+//     }
  
     
 
-    sendMessage(msg: string){
-        this.socket.emit("/chat", msg);
-    }
+//     sendMessage(msg: string){
+//         this.socket.emit("/chat", msg);
+//     }
     
-    getMessage() {
-        return this.socket
-            .fromEvent("/chat")
-            .map((data:any) => {data.msg.json();console.log(data);} );
-    }
+//     getMessage() {
+//         return this.socket
+//             .fromEvent("/chat")
+//             .map((data:any) => {data.msg.json();console.log(data);} );
+//     }
 
-    // close() {
-    //     this.socket.disconnect()
-    // }
-}
+//     // close() {
+//     //     this.socket.disconnect()
+//     // }
+// }
 
 @Injectable()
 export class AppService {
@@ -142,6 +142,18 @@ export class AppService {
 
     public ReturningOrder(id){
         let url = this.apiUrl+'/order/returning/';
+        let data={
+            order_id:id
+        }
+        let head = new Headers({'Content-Type': 'application/json'});
+        head.set('Authorization','Token '+localStorage.getItem('token')); 
+        return this._http.post(url,data,{headers: head})
+                        .map((res:Response) => res.json())
+                        .catch (this.handleError);
+    }
+    
+    public WashingOrder(id){
+        let url = this.apiUrl+'/order/washing/';
         let data={
             order_id:id
         }

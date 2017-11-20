@@ -1,0 +1,74 @@
+/*bannerContainer*/
+.bannerContainer{
+	width: 100%;
+	/* overflow: hidden; */
+}
+.ctn-banner{
+	width: 100%;
+	text-align: center;
+	padding: 100px 0 180px;
+	/* overflow: hidden; */
+}
+.ctn-banner h3{
+	color: #fff;
+	font-family: 'AvenirNextLTPro-Bold';
+	font-size: 40px;
+	line-height: 67px;
+	margin-bottom: 40px;
+}
+.ctn-banner p{
+	color: #fff;
+	font-size: 18px;
+	line-height: 25px;
+	margin-bottom: 30px;
+}
+.ctn-banner-btt{
+	width: 100%;
+	padding-top: 100px;
+	overflow: hidden;
+	text-align: center;
+}
+.ctn-banner-btt a{
+	font-size: 14px;
+	color: #fff;
+	text-transform: uppercase;
+	display: inline-block;
+	text-decoration: none;
+	padding: 10px 30px;
+	margin: 10px 0;
+}
+.ctn-banner-btt a.bn-btt1 .iconPlay{
+	position: absolute;
+	top: 7px;
+    left: 10px;
+    border: 0
+}
+.ctn-banner-btt a.bn-btt1{
+	position: relative;
+	padding-left: 40px;
+	border: 1px solid #fff;
+	border-radius: 4px;
+	margin-right: 20px;
+}
+.ctn-banner-btt a.bn-btt2{
+	background: #ef3968;
+	border: 1px solid #ef3968;
+	border-radius: 4px;
+}
+.ctn-banner-btt a.bn-btt1:hover{
+	border: 1px solid #ef3968;
+	background: #ef3968 no-repeat center left 15px;
+}
+.ctn-banner-btt a.bn-btt2:hover{
+	background: #f42156;
+	border: 1px solid #f42156;
+}
+
+/*partners*/
+.wrapper{
+	margin-top: 80px;
+}
+.partners-wrapper{
+	background: url(/assets/jean.jpg) #fff no-repeat center top;
+	background-size: cover;
+}

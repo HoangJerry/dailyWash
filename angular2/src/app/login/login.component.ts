@@ -8,12 +8,14 @@ import { Router }	         from '@angular/router';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+  user;
   email:string = '';
   password:string = '';
   phone:string = '';
   isRegister:boolean = false;
   errors = [];
   constructor(private _router: Router, private _api: AppService, private _auth: AuthService){
+    
   };
 
   ngOnInit() {
@@ -24,8 +26,14 @@ export class LoginComponent implements OnInit {
 	            (res:any) => {
                 let payload = res.json();
                 localStorage.setItem('body',res._body);
-                this._auth.login(payload.token);
-                this._router.navigate(['/dashboard']);
+                this._auth.login(payload.token);    
+                this.user=JSON.parse(localStorage.getItem('body'));        
+                if (this.user.is_wash_man==true || this.user.is_delivery_man==true){
+                  this._router.navigate(['/dashboard']);
+                }
+                else {
+                  this._router.navigate(['/home']);
+                }
 	            },
 	            (error:any) =>  this.errors = error
 	        );

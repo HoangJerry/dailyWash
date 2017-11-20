@@ -1,27 +1,46 @@
 import { Routes, RouterModule }     from '@angular/router';
 
+import { AppComponent }         from './app.component';
 import { UserDetailComponent }      from './user-detail/user-detail.component';
 import { UserListComponent }        from './user-list/user-list.component';
 import { LoginComponent }           from './login/login.component';
 import { DashboardComponent }       from './dashboard/dashboard.component';
 import { UserOrderComponent } from './user-order/user-order.component';
+import { DashboardWashComponent } from './dashboard-wash/dashboard-wash.component';
+import { HomeComponent } from './home/home.component';
+import { DashboardMainComponent } from './dashboard-main/dashboard-main.component';
 
 import { AuthGuard }              from './app.service';
 
 export const routes: Routes = [
   {
     path: '',
-    redirectTo: '/dashboard',
+    redirectTo: '/app',
     pathMatch: 'full',
+  }, 
+  {
+    path: 'app',
+    component: AppComponent,
+    canActivate:[AuthGuard],
   },
   {
     path: 'dashboard',
-    component: DashboardComponent,
+    component: DashboardMainComponent,
     canActivate:[AuthGuard],
+    // children: [
+    //   {
+    //     path: 'detail/:id',
+    //     component: UserDetailComponent
+    //   },
+    // ]
     children: [
       {
-        path: 'detail/:id',
-        component: UserDetailComponent
+        path: 'wash',
+        component: DashboardWashComponent
+      },
+      {
+        path: 'delivery',
+        component: DashboardComponent,
       },
     ]
   },
@@ -30,8 +49,8 @@ export const routes: Routes = [
     component: LoginComponent,
   },
   {
-    path: 'order',
-    component: UserOrderComponent,
+    path: 'home',
+    component: HomeComponent,
     canActivate:[AuthGuard]
   }
 

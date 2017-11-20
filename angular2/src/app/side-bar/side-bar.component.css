@@ -13,9 +13,18 @@
 .logo-font{
 	font-family: 'Princess Sofia', cursive;
 	/*font-family: 'Lobster', cursive;*/
-	font-size: 30px
+	font-size: 30px;
 }
 .clean-border-navbar{
 	border-radius:0px;
 	border:0px;
+}
+.navbar-default .navbar-nav>li>a{
+	color: #fff;
+}
+.navbar-default .navbar-brand{
+	color: #fff;
+}
+.navbar-default .navbar-toggle .icon-bar{
+	background-color: #fff;
 }
