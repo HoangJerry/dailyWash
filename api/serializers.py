@@ -55,3 +55,8 @@ class OrderNewSerializer(serializers.ModelSerializer):
     class Meta():
         model = Order
 
+class CatagorySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Category
+        fields = ('id', 'name', 'level')
+
