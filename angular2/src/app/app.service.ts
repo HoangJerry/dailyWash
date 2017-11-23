@@ -8,34 +8,28 @@ import { Observer }                 from 'rxjs/Observer';
 import 'rxjs/Rx';
 import 'rxjs/add/operator/map';
 
-// import { Socket } from 'ngx-socket-io';
+import { Socket } from 'ngx-socket-io';
  
-// @Injectable()
-// export class ChatService {
+@Injectable()
+export class ChatService {
     
-//     constructor(private socket: Socket) { 
-//         console.log("here");
-//         this.socket.on('chat', () => {
-//            console.log('connected'); 
-//         });
-//     }
- 
-    
+    constructor(private socket: Socket) { 
+        console.log("here");
+        this.socket.on('chat', () => {
+           console.log('connected'); 
+        });
+    }
 
-//     sendMessage(msg: string){
-//         this.socket.emit("/chat", msg);
-//     }
+    sendMessage(msg: string){
+        this.socket.emit("", msg);
+    }
     
-//     getMessage() {
-//         return this.socket
-//             .fromEvent("/chat")
-//             .map((data:any) => {data.msg.json();console.log(data);} );
-//     }
-
-//     // close() {
-//     //     this.socket.disconnect()
-//     // }
-// }
+    getMessage() {
+        return this.socket
+            .fromEvent("")
+            .map((data:any) => {data.msg.json();console.log(data);} );
+    }
+}
 
 @Injectable()
 export class AppService {
@@ -72,7 +66,21 @@ export class AppService {
                         .map((res:Response) => res.json())
                         .catch (this.handleError);
     }
+
+    public CitiesList(){
+        let url = this.apiUrl+'/address/city/';
+        return this._http.get(url)
+                        .map((res:Response) => res.json())
+                        .catch (this.handleError);
+    }
+    public DistrictsList(id){
+        let url = this.apiUrl+'/address/city/'+id+'/';
+        return this._http.get(url)
+                        .map((res:Response) => res.json())
+                        .catch (this.handleError);
+    }
     
+
     public UserLogin(email,password){
         let url = this.apiUrl+'/user/login/';
         let data={
@@ -86,6 +94,15 @@ export class AppService {
 
     public UserDetail(id){
         let url = this.apiUrl+'/user/'+id+'/';
+        let head = new Headers({'Content-Type': 'application/json'});
+        head.set('Authorization','Token '+localStorage.getItem('token')); 
+        return this._http.get(url,{headers: head})
+                        .map((res:Response) => res.json())
+                        .catch (this.handleError);
+    }
+
+    public OrderDetail(id){
+        let url = this.apiUrl+'/order/'+id+'/';
         let head = new Headers({'Content-Type': 'application/json'});
         head.set('Authorization','Token '+localStorage.getItem('token')); 
         return this._http.get(url,{headers: head})
@@ -172,8 +189,24 @@ export class AppService {
                         .map((res:Response) => res.json())
                         .catch (this.handleError);
     }
+    public OrderAllTaking(){
+        let url = this.apiUrl + '/order/all/taking/';
+        let head = new Headers({'Content-Type': 'application/json'});
+        head.set('Authorization','Token '+localStorage.getItem('token')); 
+        return this._http.get(url,{headers: head})
+                        .map((res:Response) => res.json())
+                        .catch (this.handleError);
+    }
     public OrderMeReturning(){
         let url = this.apiUrl + '/order/me/returning/';
+        let head = new Headers({'Content-Type': 'application/json'});
+        head.set('Authorization','Token '+localStorage.getItem('token')); 
+        return this._http.get(url,{headers: head})
+                        .map((res:Response) => res.json())
+                        .catch (this.handleError);
+    }
+    public OrderMeWashing(){
+        let url = this.apiUrl + '/order/me/washing/';
         let head = new Headers({'Content-Type': 'application/json'});
         head.set('Authorization','Token '+localStorage.getItem('token')); 
         return this._http.get(url,{headers: head})

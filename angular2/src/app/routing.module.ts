@@ -9,6 +9,8 @@ import { UserOrderComponent } from './user-order/user-order.component';
 import { DashboardWashComponent } from './dashboard-wash/dashboard-wash.component';
 import { HomeComponent } from './home/home.component';
 import { DashboardMainComponent } from './dashboard-main/dashboard-main.component';
+import { SignupComponent } from './signup/signup.component';
+import { SignupSuccessComponent } from './signup-success/signup-success.component';
 
 import { AuthGuard }              from './app.service';
 
@@ -47,6 +49,14 @@ export const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent,
+  },
+  {
+    path: 'signup',
+    component: SignupComponent,
+  },
+  {
+    path: 'success',
+    component: SignupSuccessComponent
   },
   {
     path: 'home',

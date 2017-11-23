@@ -2,7 +2,7 @@
 from django import forms
 from django.contrib import admin
 from django.utils.translation import ugettext_lazy as _
-
+from django.contrib.auth.forms import ReadOnlyPasswordHashField
 from import_export import resources,fields
 from import_export.admin import ExportActionModelAdmin
 from unify_django.admin import UnifyBaseUserAdmin, BaseModelAdmin
@@ -15,6 +15,10 @@ class UserAdminForm(forms.ModelForm):
         super(UserAdminForm, self).__init__(*args, **kwargs)
         self.fields['city'].queryset = Address.objects.filter(parent__isnull=True)
         self.fields['district'].queryset = Address.objects.filter(parent__isnull=False)
+        self.fields['password'] = ReadOnlyPasswordHashField(label= ("Password"),
+        help_text= ("Raw passwords are not stored, so there is no way to see "
+                    "this user's password, but you can change the password "
+                    "using <a href=\"password/\">this form</a>."))
 
 class UserResource(resources.ModelResource):
     class Meta:
@@ -70,6 +74,8 @@ class OrderAdmin(admin.ModelAdmin):
     form = OrderForm
     list_display = ('id','product','status','user','take_man','wash_man','return_man','total')
     list_filter = ('status',)
+    list_editable = ('status',)
+    list_per_page = 25
 
 class SoftAdditionAdmin(admin.ModelAdmin):
     list_display = ('name','price')

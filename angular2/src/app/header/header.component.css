@@ -9,12 +9,14 @@ p,a{
 	/* position: fixed; */
 	top: 0;
 	z-index: 999;
-	background: #fff;
+	background: rgba(0, 0, 0, 0.48);;
 	overflow: hidden;
 	border-bottom: 1px solid #c8c6c9;
 }
 #logo{
-	padding: 0;
+	font-size: 30px;
+	font-family: 'Princess Sofia', cursive;
+	padding: 15px 0px;
 }
 #logo img{
 	width: 42px;
@@ -35,16 +37,17 @@ p,a{
 .navbar .nav>li {
 	float: left;
 }
-.headerContainer .navbar ul.nav > li > a {
-	font-size: 14px;
-	color: #4a4a4a;
+.headerContainer .navbar ul > li > a {
+	font-size: 15px;
+	color: #fff;
 	text-decoration: none;
 	line-height: 31px;
 	padding: 5px 21px;
 	text-transform: uppercase;
 	font-weight: normal;
+	font-weight: 600;
 }
-.headerContainer .navbar ul.nav > li > a:hover{
+.headerContainer .navbar ul > li > a:hover{
 	color: #ee3967;
 }
 .navbar .navbar-collapse{}
@@ -52,10 +55,10 @@ p,a{
 	margin-right: 17px;
 	padding: 5px 40px;
 	min-height: 30px;
-	color: #4a4a4a;
+	color: #fff;
 }
 .navbar .navbar-collapse >ul>li>a.signup{
-	padding: 3px 70px;
+	padding: 10px 70px;
 	border: 1px solid #ee3967;
 	color: #ee3967;
 	border-radius: 30px;
@@ -68,7 +71,7 @@ p,a{
 	background: #f42156;
 	border: 1px solid #f42156;
 }
-.nav>li>a:hover, .nav>li>a:focus{
+li>a:hover, li>a:focus{
 	background: none;
 }
 .affix-top{
@@ -76,7 +79,7 @@ p,a{
 	border-bottom: 0;
 
 }
-.affix-top .navbar ul.nav > li > a {
+.affix-top .navbar ul> li > a {
 	color: #fff;
 }
 .affix-top .navbar .navbar-collapse >ul>li>a.signup:hover{
@@ -88,3 +91,24 @@ p,a{
 	background-color: #000;
 }
 
+
+@media (max-width: 991px){
+	.navbar .navbar-collapse >ul>li>a.login{
+		padding: 4px 24px;
+	}
+	.navbar .navbar-collapse >ul>li>a.signup{
+		padding: 5px 50px;
+		border: 1px solid #ee3967;
+		color: #ee3967;
+		border-radius: 30px;
+	}
+
+}
+@media (max-width: 767px){
+	.headerContainer {
+	    padding: 0;
+	}
+	.navbar-nav ul li{
+		display: block;
+	}
+}

@@ -1,0 +1,102 @@
+<div class="contentContainer">
+	<div class="container">
+		<div class="row">
+			<div class="contentLeft col-md-4 col-sm-5 col-xs-12">
+				<!-- Header text -->
+				<h1  class="logoRegister animated slideInRight"><a routerLink="">Daily Wash</a></h1>
+				<h3 class ="animated slideInRight">Register new member</h3>
+				<p class ="animated slideInRight">Free and allway.</p>
+				<!--  -->
+				<form class="form animated slideInRight">
+					<div class="row ">
+						<div class="col-xs-7">
+							<div class="row">
+								<div class="col-md-12">
+									<label>First Name</label>
+								</div>
+								<div class="col-md-12">
+									<input type="text" id="first_name" name="firstname" required [(ngModel)]="firstNameType">
+								</div>
+							</div>
+						</div>
+						<div class="col-xs-5">
+							<div class="row">
+								<div class="col-md-12">
+									<label>Last Name</label>
+								</div>
+								<div class="col-md-12">
+									<input type="text" id="last_name" name="lastname" required [(ngModel)]="lastNameType">
+								</div>
+							</div>
+						</div>
+					</div><!-- end first name -->
+					<div class="row">
+						<div class="col-xs-6">
+							<div class="row">
+								<div class="col-md-12">
+									<label>City</label>
+								</div>
+								<div class="col-md-12">
+									<select name="city" class="input-block-level required" id="city" required [ngModel]="citySelected" (ngModelChange)="onChangeCity($event)">
+										<option *ngFor="let city of cities" style="z-index: 10;" [ngValue]="city">
+												{{city.name}}
+										</option>
+									</select>
+								</div>
+							</div>
+						</div>
+						<div class="col-xs-6">
+							<div class="row">
+								<div class="col-md-12">
+									<label>District</label>
+								</div>
+								<div class="col-md-12">
+									<select name="district" class="input-block-level required" id="district" required [(ngModel)]="districtSelected">
+										<option *ngFor="let district of districts" style="z-index: 10;" [ngValue]="district">
+												{{district.name}}
+										</option>
+									</select>
+								</div>
+							</div>
+						</div>
+					</div><!-- end last name -->
+					<div class="row">
+						<div class="col-md-12">
+							<label>Address</label>
+						</div>
+						<div class="col-md-12">
+							<input type="text" id="address" name="address" required [(ngModel)]="addressType">
+						</div>
+					</div><!-- end address -->
+					<div class="row">
+						<div class="col-md-12">
+							<label>Email</label>
+						</div>
+						<div class="col-md-12">
+							<input type="email" name="email" id="email" required [(ngModel)]="emailType">
+						</div>
+					</div><!-- end email -->
+					<div class="row">
+						<div class="col-md-12">
+							<label>Phone</label>
+						</div>
+						<div class="col-md-12">
+							<input type="text" id="phone" name="phone" required [(ngModel)]="phoneType">
+						</div>
+					</div><!-- end phone -->
+					<div class="row">
+						<div class="col-xs-12">
+							<input type="submit" class ="btt-submit" value="valider">
+						</div>
+					</div><!-- end submit -->
+				</form>
+				<!-- end form -->
+			</div>
+			<!-- end left side -->
+			<div class="contentRight col-md-8 col-sm-7 col-xs-12">
+				<img [src]="'/assets/signup/sign-img1.jpg/'" >
+				<img [src]="'/assets/signup/sign-img2.jpg/'" >
+			</div>
+		</div>
+	</div>
+</div> <!-- contentContainer -->

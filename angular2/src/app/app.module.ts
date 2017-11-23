@@ -12,6 +12,7 @@ import { routes }           from './routing.module';
 import { AppService }           from './app.service';
 import { AuthService }           from './app.service';
 import { AuthGuard }           from './app.service';
+import { ChatService }           from './app.service';
 
 // Component
 import { AppComponent }         from './app.component';
@@ -23,6 +24,8 @@ import { DashboardWashComponent } from './dashboard-wash/dashboard-wash.componen
 import { DashboardMainComponent } from './dashboard-main/dashboard-main.component';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
+import { SignupComponent } from './signup/signup.component';
+import { SignupSuccessComponent } from './signup-success/signup-success.component';
 
 
 // Bootstraps
@@ -57,6 +60,8 @@ const config: SocketIoConfig = { url: 'ws://localhost:8000/', options: {} };
     DashboardMainComponent,
     HeaderComponent,
     FooterComponent,
+    SignupComponent,
+    SignupSuccessComponent,
   ],
   imports: [
     BrowserModule,
@@ -74,12 +79,13 @@ const config: SocketIoConfig = { url: 'ws://localhost:8000/', options: {} };
     MatButtonModule,
     MatDatepickerModule,
     ModalModule.forRoot(),
-    // SocketIoModule.forRoot(config),
+    SocketIoModule.forRoot(config),
   ],
   providers: [
     AppService,
     AuthService,
     AuthGuard,
+    ChatService,
   ],
   // enableProdMode, 
   bootstrap: [AppComponent]

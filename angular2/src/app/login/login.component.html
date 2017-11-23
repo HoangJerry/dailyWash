@@ -13,7 +13,10 @@
           <mat-form-field class="full-width">
             <input matInput [(ngModel)]="password" type="password" class="form-control" id="inputPassword" placeholder="Password" name = "password-login">
           </mat-form-field>
-          <button mat-button [style.display]="isRegister?'none':'block'" (click)="onClickLogin()" class="accent-color text-primary-color full-width">Sign in</button>
+          <button mat-button (click)="onClickLogin()" class="accent-color text-primary-color full-width padding15">Sign in</button>
+          <br>
+          <br>
+          Don't have account <a [routerLink]="['/signup']"> Click here </a>
   
         </form>
       </div>

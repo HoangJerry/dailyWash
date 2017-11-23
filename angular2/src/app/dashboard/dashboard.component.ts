@@ -1,5 +1,5 @@
 import { Component, OnInit, TemplateRef }  from '@angular/core';
-import { AppService }         from '../app.service';
+import { AppService,ChatService }         from '../app.service';
 import { BsModalService }     from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { Router, ActivatedRoute } from '@angular/router'
@@ -30,7 +30,9 @@ export class DashboardComponent implements OnInit {
     private route: Router,
     private _api: AppService,
     private activeRoute: ActivatedRoute,
-    private modalService: BsModalService,) {
+    private modalService: BsModalService,
+    private _chat:ChatService,
+    ) {
     
   }
   openModal(template: TemplateRef<any>) {
@@ -105,15 +107,7 @@ export class DashboardComponent implements OnInit {
                         (error:any) =>  this.errors = error
               );
   }
-  moveWash(id){
-    this._api.WashingOrder(id)
-              .subscribe(
-                        (res:any) => {
-                          this.myPending();
-                        },
-                        (error:any) =>  this.errors = error
-              );
-  }
+
   moveReturn(id){
     this._api.ReturningOrder(id)
               .subscribe(

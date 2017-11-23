@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,9 +9,12 @@
 	<link rel="stylesheet" type="text/css" href="styles/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="styles/index.css">
 	<link rel="stylesheet" type="text/css" href="styles/custom-media.css">
-	
+	<script src='styles/jquery.js' type='text/javascript'></script>
+	<script src='styles/bootstrap.min.js' type='text/javascript'></script>
+	<script src="styles/wow.js"></script>
+	<script src="styles/wow.min.js"></script>
 </head>
- 
+
 <body  data-spy="scroll" data-target=".navbar" data-offset="50">
 <div class="wrapper partners-wrapper">
 	<div class="headerContainer" data-spy="affix" data-offset-top="250">
@@ -27,9 +31,6 @@
 					</div>
 					<div class="navbar-collapse collapse col-md-10 col-sm-10 navbar-right" id="myNavba">
 						<ul class="nav navbar-nav">
-							<li><a href="/#viet">clients</a></li>
-							<li><a href="#">features</a></li>
-							<li><a href="#">help</a></li>
 							<li class="rf-logi"><a href="#" class="login">login</a></li>
 							<li class="rf-logi"><a href="#" class="signup">sign up</a></li>
 						</ul>
@@ -171,6 +172,37 @@
 		</div>
 	</div>
 </div>
+<script type="text/javascript">
+	$(document).ready(function(){
+		wow = new WOW(
+	      {
+	        animateClass: 'animated',
+	        offset:       100,
+	        callback:     function(box) {
+	          console.log("WOW: animating <" + box.tagName.toLowerCase() + ">")
+	        }
+	      }
+	    );
+	    wow.init();
+	})
+</script>
+<script>
+function myFunction() {
+    document.getElementById("myDropdown").classList.toggle("show");
+}
+window.onclick = function(event) {
+  if (!event.target.matches('.dropbtn')) {
 
+    var dropdowns = document.getElementsByClassName("dropdown-content");
+    var i;
+    for (i = 0; i < dropdowns.length; i++) {
+      var openDropdown = dropdowns[i];
+      if (openDropdown.classList.contains('show')) {
+        openDropdown.classList.remove('show');
+      }
+    }
+  }
+}
+</script>
 </body>
 </html>

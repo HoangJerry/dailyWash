@@ -109,7 +109,7 @@ class OrderTaking(generics.ListAPIView):
             except Exception, e:
                 print('Error class OrderTaking ', e)
                 return Response({'meassages': 'Not found order'}, status=status.HTTP_400_BAD_REQUEST)
-            order.return_man = self.request.user
+            order.take_man = self.request.user
             order.status = Order.DELIVERY_STATUS_TAKING
             order.save()
             serializer = self.get_serializer(order)
@@ -230,6 +230,10 @@ class TakingPending(generics.ListAPIView):
     def get_queryset(self):
         return Order.objects.filter(take_man=self.request.user.id, status=Order.DELIVERY_STATUS_TAKING)
 
+class AllTakingPending(generics.ListAPIView):
+    permission_classes = [permissions.IsAuthenticated]
+    queryset = Order.objects.filter(status=Order.DELIVERY_STATUS_TAKING)
+    serializer_class = OrderNewSerializer
 
 class ReturningPending(generics.ListAPIView):
     queryset = Order.objects
@@ -238,16 +242,112 @@ class ReturningPending(generics.ListAPIView):
     def get_queryset(self):
         return Order.objects.filter(return_man=self.request.user.id, status=Order.DELIVERY_STATUS_RETURNING)
 
-from socketio.namespace import BaseNamespace
+class WashingPending(generics.ListAPIView):
+    queryset = Order.objects
+    serializer_class = OrderNewSerializer
+
+    def get_queryset(self):
+        return Order.objects.filter(wash_man=self.request.user.id, status=Order.DELIVERY_STATUS_WASHING)
+
+class OrderDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Order.objects.all()
+    permission_classes = [permissions.IsAuthenticated]
+    serializer_class = OrderNewSerializer
+
+# from socketio.namespace import BaseNamespace
+# from socketio import socketio_manage
+
+# class ChatNamespace(BaseNamespace):
+
+#     def on_user_msg(self, msg):
+#         print "hererer"
+#         self.emit('user_msg', msg)
+
+# def socketio_service(request):
+#     socketio_manage(request.environ, {'': ChatNamespace}, request)
+#     return 'out'
+
+from gevent import monkey
+
 from socketio import socketio_manage
+from socketio.server import SocketIOServer
+from socketio.namespace import BaseNamespace
+from socketio.mixins import RoomsMixin, BroadcastMixin
 
-class ChatNamespace(BaseNamespace):
 
-    def on_user_msg(self, msg):
-        print "hererer"
-        self.emit('user_msg', msg)
+class ChatNamespace(BaseNamespace, RoomsMixin, BroadcastMixin):
+    def on_nickname(self, nickname):
+        self.request['nicknames'].append(nickname)
+        self.socket.session['nickname'] = nickname
+        self.broadcast_event('announcement', '%s has connected' % nickname)
+        self.broadcast_event('nicknames', self.request['nicknames'])
+        # Just have them join a default-named room
+        self.join('main_room')
 
-def socketio_service(request):
-    socketio_manage(request.environ, {'': ChatNamespace}, request)
-    return 'out'
+    def recv_disconnect(self):
+        # Remove nickname from the list.
+        nickname = self.socket.session['nickname']
+        self.request['nicknames'].remove(nickname)
+        self.broadcast_event('announcement', '%s has disconnected' % nickname)
+        self.broadcast_event('nicknames', self.request['nicknames'])
 
+        self.disconnect(silent=True)
+
+    def on_user_message(self, msg):
+        self.emit_to_room('main_room', 'msg_to_room',
+            self.socket.session['nickname'], msg)
+
+    def recv_message(self, message):
+        print "PING!!!", message
+
+class Application(object):
+    def __init__(self):
+        self.buffer = []
+        # Dummy request object to maintain state between Namespace
+        # initialization.
+        self.request = {
+            'nicknames': [],
+        }
+
+    def __call__(self, environ, start_response):
+        path = environ['PATH_INFO'].strip('/')
+
+        if not path:
+            start_response('200 OK', [('Content-Type', 'text/html')])
+            return ['<h1>Welcome. '
+                'Try the <a href="/chat.html">chat</a> example.</h1>']
+
+        if path.startswith('static/') or path == 'chat.html':
+            try:
+                data = open(path).read()
+            except Exception:
+                return not_found(start_response)
+
+            if path.endswith(".js"):
+                content_type = "text/javascript"
+            elif path.endswith(".css"):
+                content_type = "text/css"
+            elif path.endswith(".swf"):
+                content_type = "application/x-shockwave-flash"
+            else:
+                content_type = "text/html"
+
+            start_response('200 OK', [('Content-Type', content_type)])
+            return [data]
+
+        if path.startswith("socket.io"):
+            socketio_manage(environ, {'': ChatNamespace}, self.request)
+        else:
+            return not_found(start_response)
+
+
+def not_found(start_response):
+    start_response('404 Not Found', [])
+    return ['<h1>Not Found</h1>']
+
+
+if __name__ == '__main__':
+    print 'Listening on port 8000 and on port 843 (flash policy server)'
+    SocketIOServer(('0.0.0.0', 8000), Application(),
+        resource="socket.io", policy_server=True,
+        policy_listener=('0.0.0.0', 8000)).serve_forever()

@@ -26,15 +26,15 @@
 					</thead>
 					<tbody>
 						<tr *ngFor="let mytaking of mytakings">
-							<td (click)="moveWash(mytaking.id)">{{mytaking.user.first_name}} {{mytaking.user.last_name}}
+							<td >{{mytaking.user.first_name}} {{mytaking.user.last_name}}
 							</td>
 						</tr>
 					</tbody>
-					<tfoot>
+					<!-- <tfoot>
 						<tr>
 							<th (click)="openModal(washman)" >Washing</th>
 						</tr>
-					</tfoot>
+					</tfoot> -->
 				</table>
 			</div>
 			<div class="col-sm-8 col-xs-6">

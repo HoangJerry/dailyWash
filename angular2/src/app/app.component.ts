@@ -18,11 +18,13 @@ export class AppComponent{
       this._router.events.subscribe(
         (url:any) => {
           this.isLoginpage=false;
-          if (url.url=="/login" || url.url=="/home") {
+          if (url.url=="/login" || url.url=="/home" || url.url=="/signup"
+            || url.url=="/success") {
             this.isLoginpage=true;
           }
         });
-      this.user=JSON.parse(localStorage.getItem('body'));        
+      this.user=JSON.parse(localStorage.getItem('body'));     
+      if (this.user){
         if (this.user.is_wash_man==true || this.user.is_delivery_man==true){
           this._router.navigate(['/dashboard']);
         }
@@ -30,6 +32,6 @@ export class AppComponent{
           this._router.navigate(['/home']);
         }
 
-      
+      };
     };
 }
