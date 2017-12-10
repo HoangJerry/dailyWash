@@ -84,9 +84,12 @@
 							<input type="text" id="phone" name="phone" required [(ngModel)]="phoneType">
 						</div>
 					</div><!-- end phone -->
+					<br>
+					{{errors}}
+					<br>
 					<div class="row">
 						<div class="col-xs-12">
-							<input type="submit" class ="btt-submit" value="valider">
+							<input type="submit" class ="btt-submit" value="valider" (click)="onClickRegister()">
 						</div>
 					</div><!-- end submit -->
 				</form>

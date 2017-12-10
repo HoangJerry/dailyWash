@@ -35,16 +35,22 @@ class UserAdmin(ExportActionModelAdmin,UnifyBaseUserAdmin):
     fieldsets = (
         (None, {'fields': ('status', 'email','password')}),
         (_('Personal info'),
-         {'fields': ('first_name', 'last_name','phone','city','district', 'avatar', 'fb_uid', 'gender',
+         {'fields': ('first_name', 'last_name','phone','city','district','street', 'avatar', 'fb_uid', 'gender',
                      'dob', 'about', 'relationship_status',)}),
         (_('Permissions'), {'fields': ('is_active', 'is_staff','is_wash_man','is_delivery_man', 'is_superuser',
                                        'groups', 'user_permissions')}),
         (_('Important dates'), {'fields': ('last_login','date_joined')}),
     )
 
+class ProductPhotoInline(admin.TabularInline):
+    model = ProductPhoto
+    extra = 0
+    min_num = 1
+
 class ProductAdmin(admin.ModelAdmin):
     list_display = ('id','status','title','category','price')
     list_editable = ('status',)
+    inlines = (ProductPhotoInline,)
 
 class AddressAdmin(admin.ModelAdmin):
     list_display = ('id','name', '_link','active')
@@ -52,6 +58,7 @@ class AddressAdmin(admin.ModelAdmin):
         (None, {
             'fields': ('parent', 'name','active')
         }),
+        
     )
 
     def _link(self, obj):
@@ -61,6 +68,17 @@ class AddressAdmin(admin.ModelAdmin):
 
 class CategoryAdmin(admin.ModelAdmin):
     list_display = ('id','name','active')
+
+class DiscountAdmin(admin.ModelAdmin):
+    list_display = ('key','active','start_date','end_date','max_user','used')
+    readonly_fields =('used',)
+    fieldsets = (
+        (None, {
+            'fields': ('key','active','percent','money', )
+        }),
+        (_('Option'),
+         {'fields': (('max_user','used'),('start_date','end_date'),'product','district_limmit','city_limmit', )}),
+    )
 
 class OrderForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
@@ -72,7 +90,7 @@ class OrderForm(forms.ModelForm):
 
 class OrderAdmin(admin.ModelAdmin):
     form = OrderForm
-    list_display = ('id','product','status','user','take_man','wash_man','return_man','total')
+    list_display = ('id','product','status','user','take_man','wash_man','return_man','discounts','total')
     list_filter = ('status',)
     list_editable = ('status',)
     list_per_page = 25
@@ -83,6 +101,7 @@ class SoftAdditionAdmin(admin.ModelAdmin):
 # Register your models here.
 admin.site.register(User, UserAdmin)
 admin.site.register(Product, ProductAdmin)
+admin.site.register(Discount, DiscountAdmin)
 admin.site.register(Address,AddressAdmin)
 admin.site.register(Category,CategoryAdmin)
 admin.site.register(Order,OrderAdmin)

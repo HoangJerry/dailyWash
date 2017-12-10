@@ -17,9 +17,11 @@ p,a{
 	font-size: 30px;
 	font-family: 'Princess Sofia', cursive;
 	padding: 15px 0px;
+	color: #fff;
 }
 #logo img{
 	width: 42px;
+
 	/*height: 42px;*/
 	/*background: url(images/logo.png) transparent no-repeat 0 0;*/
 	display: block;

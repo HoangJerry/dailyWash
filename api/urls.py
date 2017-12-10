@@ -30,6 +30,7 @@ urlpatterns = [
 	url(r'^product/$', views.ProductAPI.as_view(), name='product'),
 
 	url(r'^user/(?P<pk>[0-9]+)/$',views.UserDetailInformations.as_view(), name='user-detail'),
+	url(r'^user/me/$',views.UserMeInformations.as_view(), name='user-detail'),
 	url(r'^address/city/$',views.Cities.as_view(), name='user-detail'),
 	url(r'^address/city/(?P<pk>[0-9]+)/$',views.Districts.as_view(), name='user-detail'),
 ]

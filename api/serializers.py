@@ -38,14 +38,22 @@ class UserDetailSerializer(serializers.ModelSerializer):
     gender = serializers.SerializerMethodField('_gender')
     city = AddressSerializer()
     district = AddressSerializer()
+    address = serializers.SerializerMethodField('_address')
     class Meta():
         model = User
         exclude = ['password']
     def _gender(self, obj):
         return obj.get_gender_display()
-
+    def _address(self,obj):
+        return obj.address
+        
+class PhotoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ProductPhoto
+        fields = ('id', 'image',)
 
 class ProductSerializer(serializers.ModelSerializer):
+    photos = PhotoSerializer(many=True, read_only=True)
     class Meta():
         model = Product
 
@@ -59,4 +67,5 @@ class CatagorySerializer(serializers.ModelSerializer):
     class Meta:
         model = Category
         fields = ('id', 'name', 'level')
+
 

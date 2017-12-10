@@ -15,23 +15,22 @@ export class AppComponent{
     errors = [];
     isLoginpage = false;
     constructor(private _router: Router, private _api: AppService){
-      this._router.events.subscribe(
-        (url:any) => {
-          this.isLoginpage=false;
-          if (url.url=="/login" || url.url=="/home" || url.url=="/signup"
-            || url.url=="/success") {
-            this.isLoginpage=true;
-          }
-        });
+      // console.log(this._router);
+      
       this.user=JSON.parse(localStorage.getItem('body'));     
       if (this.user){
         if (this.user.is_wash_man==true || this.user.is_delivery_man==true){
           this._router.navigate(['/dashboard']);
         }
-        else {
-          this._router.navigate(['/home']);
+      else{
+          // this._router.events.subscribe(
+          // (url:any) => {
+          //   console.log(url.url);
+            // if (url.url=="/app" || url.url=="/") {
+              // this._router.navigate(['/home']);
+          //   }
+          // });
         }
-
       };
     };
 }

@@ -72,3 +72,59 @@
 	background: url(/assets/jean.jpg/) #fff no-repeat center top;
 	background-size: cover;
 }
+
+/*Main container*/
+
+.main-container{
+	background-color: #fff;
+}
+.marginTop100{
+	padding-top: 5vh;
+}
+/* boutiquesContainer */
+.boutiquesContainer{
+	width: 100%;
+	padding: 60px 0 90px;
+	border-bottom: 1px solid #c8c6c9;
+}
+.boutiquesContainer h2{
+	margin: 0;
+	margin-bottom: 30px;
+	color: #000;
+}
+.ctn-boutiques .display{
+	height: 35vh;
+	overflow: hidden;
+}
+.ctn-boutiques a img{
+	width: 100%;
+	min-height: 35vh;
+	margin-bottom: 10px;
+}
+.ctn-boutiques p {
+	margin: 0;
+	color: #ff728d;
+	margin: 10px 0;
+}
+.ctn-boutiques h3 {
+	margin: 0;
+	color: #000;
+	margin-bottom: 10px;
+}
+.ctn-boutiques p span{
+	margin: 0;
+	color: #000;
+	margin-bottom: 70px;
+}
+.ctn-boutiques{
+	padding-bottom: 70px;
+}
+
+/*material css*/
+.mat-tab-group.mat-primary .mat-ink-bar, .mat-tab-nav-bar.mat-primary .mat-ink-bar{
+    background-color: #E91E63;
+}
+.mat-button, .mat-icon-button, .mat-raised-button{
+	color: white !important;
+    background-color: dimgrey;
+}

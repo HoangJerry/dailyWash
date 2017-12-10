@@ -18,6 +18,13 @@ class User(UnifyBaseUser):
     is_wash_man = models.BooleanField(default=False)
     is_delivery_man = models.BooleanField(default=False)
 
+    @property
+    def address(self):
+        # return u'{},{},{}'.format(self.street,self.district.name,self.city.name)
+        ret = filter(lambda x: x != None and x != '', 
+                [self.street, self.district.name, self.city.name])
+        return ', '.join(ret)
+
 class Product(models.Model):
     STATUS_DISABLE = 0
     STATUS_ENABLE = 10
@@ -31,10 +38,28 @@ class Product(models.Model):
     describe = models.CharField(max_length=200,null=True, blank=True)
     category = models.ForeignKey("Category",related_name='category')
     seen = models.IntegerField(default=0)
-
     def __str__(self):              # __unicode__ on Python 2
         return self.title
-
+class Discount(models.Model):
+    """docstring for Discount"""
+    def __str__(self):              # __unicode__ on Python 2
+        return self.key
+    active = models.BooleanField(default=False)
+    key = models.CharField(max_length=200)
+    money = models.IntegerField(default=0)
+    percent = models.IntegerField(default=0)
+    max_user = models.IntegerField(default=0,null=True, blank=True)
+    used = models.IntegerField(default=0,null=True, blank=True)
+    product = models.ForeignKey("Product", related_name='discounts',null=True, blank=True)
+    district_limmit = models.ForeignKey("Address",related_name='district_limmit', null=True, blank=True)
+    city_limmit = models.ForeignKey("Address",related_name='city_limmit', null=True, blank=True)
+    end_date = models.DateTimeField(null=True, blank=True)
+    start_date = models.DateTimeField(null=True, blank=True)
+        
+class ProductPhoto(models.Model):
+    image = models.ImageField(_('Picture shall be squared, max 640*640, 500k'), upload_to='shop-photos')
+    product = models.ForeignKey(Product, related_name='photos')
+    
 class SoftAddition(models.Model):
     name = models.CharField(max_length=200)
     price = models.IntegerField(default=0)
@@ -72,7 +97,6 @@ class Order(models.Model):
         (TIME_NOON, _("11h - 13h")),
         (TIME_AFTERNOON, _("17h - 19h")),
     )
-
     user = models.ForeignKey(User, related_name='user_order')
     take_man = models.ForeignKey(User, related_name='take_man',null=True, blank=True)
     wash_man = models.ForeignKey(User, related_name='wash_man',null=True, blank=True)
@@ -85,6 +109,7 @@ class Order(models.Model):
     unit = models.FloatField(null=True, blank=True, help_text = _('Take man comfirm kg/unit'))
     estimete_unit = models.FloatField(help_text = _('User estimate there order'))
     money = models.FloatField(null=True, blank=True)
+    discounts = models.ForeignKey(Discount, related_name='discount_order',null=True, blank=True)
     street_source = models.CharField(max_length=200,null=True, blank=True)
     street_destination = models.CharField(max_length=200,null=True, blank=True)
     rating = models.SmallIntegerField(null=True, blank=True)

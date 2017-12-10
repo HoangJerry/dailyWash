@@ -11,13 +11,14 @@ import { HomeComponent } from './home/home.component';
 import { DashboardMainComponent } from './dashboard-main/dashboard-main.component';
 import { SignupComponent } from './signup/signup.component';
 import { SignupSuccessComponent } from './signup-success/signup-success.component';
+import { ProductDetailComponent } from './product-detail/product-detail.component';
 
 import { AuthGuard }              from './app.service';
 
 export const routes: Routes = [
   {
     path: '',
-    redirectTo: '/app',
+    redirectTo: '/home',
     pathMatch: 'full',
   }, 
   {
@@ -50,6 +51,7 @@ export const routes: Routes = [
     path: 'login',
     component: LoginComponent,
   },
+
   {
     path: 'signup',
     component: SignupComponent,
@@ -62,7 +64,17 @@ export const routes: Routes = [
     path: 'home',
     component: HomeComponent,
     canActivate:[AuthGuard]
-  }
+  },
+  {
+    path: 'product/:id',
+    component: ProductDetailComponent,
+    canActivate:[AuthGuard]
+  },
+  {
+    path: 'order',
+    component: UserOrderComponent,
+    canActivate:[AuthGuard]
+  },
 
 ];
 

@@ -15,19 +15,15 @@ export class ChatService {
     
     constructor(private socket: Socket) { 
         console.log("here");
-        this.socket.on('chat', () => {
-           console.log('connected'); 
+        this.socket.connect();
+        console.log(this.socket);
+        this.socket.on('connect', function() {
+            this.socket.subscribe('my channel');
         });
-    }
 
-    sendMessage(msg: string){
-        this.socket.emit("", msg);
-    }
-    
-    getMessage() {
-        return this.socket
-            .fromEvent("")
-            .map((data:any) => {data.msg.json();console.log(data);} );
+        // this.socket.on('connect', () => {
+        //    console.log('connected'); 
+        // });
     }
 }
 
@@ -57,6 +53,14 @@ export class AppService {
                         .map((res:Response) => res.json())
                         .catch (this.handleError);
     }
+    public UserMe(){
+        let url = this.apiUrl+'/user/me/';
+        let head = new Headers({'Content-Type': 'application/json'});
+        head.set('Authorization','Token '+localStorage.getItem('token')); 
+        return this._http.get(url,{headers: head})
+                        .map((res:Response) => res.json())
+                        .catch (this.handleError);
+    }
 
     public WashManList(){
         let url = this.apiUrl+'/user/washman/';
@@ -73,8 +77,29 @@ export class AppService {
                         .map((res:Response) => res.json())
                         .catch (this.handleError);
     }
+
     public DistrictsList(id){
         let url = this.apiUrl+'/address/city/'+id+'/';
+        return this._http.get(url)
+                        .map((res:Response) => res.json())
+                        .catch (this.handleError);
+    }
+
+    public CategoriesList(){
+        let url = this.apiUrl+'/category/';
+        return this._http.get(url)
+                        .map((res:Response) => res.json())
+                        .catch (this.handleError);
+    }
+
+    public ProductByCategory(id){
+        let url = this.apiUrl+'/product/?category_id='+id;
+        return this._http.get(url)
+                        .map((res:Response) => res.json())
+                        .catch (this.handleError);
+    }
+    public ProductList(){
+        let url = this.apiUrl+'/product/';
         return this._http.get(url)
                         .map((res:Response) => res.json())
                         .catch (this.handleError);
@@ -86,6 +111,22 @@ export class AppService {
         let data={
             email:email,
             password:password
+        }
+        return this._http.post(url,data,{headers: this.headers})
+                        // .map((res:Response) => res.json())
+                        .catch (this.handleError);
+    }
+
+    public UserSignUp(firstname,lastname,city,district,address,email,phone){
+        let url = this.apiUrl+'/user/signup/';
+        let data={
+            email:email,
+            first_name:firstname,
+            last_name:lastname,
+            phone:phone,
+            city:city,
+            district:district,
+            street:address,
         }
         return this._http.post(url,data,{headers: this.headers})
                         // .map((res:Response) => res.json())

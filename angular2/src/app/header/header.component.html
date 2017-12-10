@@ -8,13 +8,13 @@
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 					</button>
-					<a href="" title="" id="logo" class="navbar-brand">DailyWash</a>
+					<a routerLink = "/home" title="" id="logo" class="navbar-brand">DailyWash</a>
 				</div>
 				<div [collapse]="isCollapsed" class="navbar-collapse collapse col-md-10 col-sm-10 navbar-right" id="myNavba">
 					<ul class="navbar-nav">
-						<li><a href="#">clients</a></li>
-						<li><a href="#">features</a></li>
-						<li><a href="#">help</a></li>
+						<li><a routerLink = "/order">My Profile</a></li>
+						<li><a routerLink = "/order">My History</a></li>
+						<li><a routerLink = "/order">Forum</a></li>
 						<!-- <li class="rf-logi"><a  class="login">Logout</a></li> -->
 						<li class="rf-logi"><a [routerLink]="" (click)="onClickLogout($event)" class="signup">Log out</a></li>
 					</ul>

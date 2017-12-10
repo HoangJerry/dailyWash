@@ -9,5 +9,36 @@
 		</div>
 	</div>
 </div>
-
+<div class="main-container">
+	<div class="container marginTop100">
+		<mat-tab-group>
+			  <mat-tab label="ALL">
+			  	<!-- <div *ngFor="let categorie of categories;"> -->
+			  		<div class="col-md-4 col-sm-4 col-xs-12" *ngFor="let product of products">
+					<div class="ctn-boutiques">
+						<div class="display">
+							<a [routerLink] routerLink="/product/{{product.id}}" *ngIf = "product.photos[0]"><img src="{{product.photos[0].image}}"></a>
+						</div>
+						<p>{{product.title}}</p>
+						<h3 style="text-decoration: line-through;">{{product.price}}.000</h3>
+						<button mat-button (click)="onClickOrder(product)">{{product.price}}.000</button>
+					</div>
+					</div>
+			  	<!-- </div> -->
+			  </mat-tab>
+			  <mat-tab *ngFor="let categorie of categories" label="{{categorie.name | uppercase }}" >		  	
+			 	<div class="col-md-4 col-sm-4 col-xs-12" *ngFor="let product of categorie.products">
+					<div class="ctn-boutiques">
+						<div class="display">
+							<a [routerLink]=''  routerLink="/product/{{product.id}}" *ngIf = "product.photos[0]"><img src="{{product.photos[0].image}}"></a>
+						</div>
+						<p>{{product.title}}</p>
+						<h3 style="text-decoration: line-through;">{{product.price}}.000</h3>
+						<button mat-button (click)="onClickOrder(product)">{{product.price}}.000</button>
+					</div>
+			</div>
+			  </mat-tab>
+		</mat-tab-group>
+	</div>
+</div>
 <app-footer></app-footer>
