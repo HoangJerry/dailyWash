@@ -8,22 +8,36 @@ import { Observer }                 from 'rxjs/Observer';
 import 'rxjs/Rx';
 import 'rxjs/add/operator/map';
 
-import { Socket } from 'ngx-socket-io';
- 
+import { WebSocketBridge } from 'django-channels'
+
 @Injectable()
 export class ChatService {
     
-    constructor(private socket: Socket) { 
-        console.log("here");
-        this.socket.connect();
-        console.log(this.socket);
-        this.socket.on('connect', function() {
-            this.socket.subscribe('my channel');
-        });
+    constructor() { 
+        const webSocketBridge = new WebSocketBridge();
+        webSocketBridge.connect('ws://localhost:8000/');
 
-        // this.socket.on('connect', () => {
-        //    console.log('connected'); 
-        // });
+        webSocketBridge.socket.onmessage = function (e) {
+                        console.log("Return value");
+          let obj = JSON.parse(e.data);
+          console.log(obj.payload.data);
+        };
+        webSocketBridge.socket.onopen = function () {
+            let data = {
+                stream: "orders",
+                payload: {
+                  action: "subscribe",
+                  data: {
+                    action:"update"
+                  },
+                }
+            }
+            let mgs = JSON.stringify(data)
+            webSocketBridge.socket.send(mgs)
+        };    
+        webSocketBridge.socket.onclose = function () {
+                console.log("Disconnected from socket");
+        };
     }
 }
 
@@ -92,20 +106,19 @@ export class AppService {
                         .catch (this.handleError);
     }
 
-    public ProductByCategory(id){
-        let url = this.apiUrl+'/product/?category_id='+id;
-        return this._http.get(url)
-                        .map((res:Response) => res.json())
-                        .catch (this.handleError);
-    }
-    public ProductList(){
-        let url = this.apiUrl+'/product/';
+    public ProductList(category_id="",id=""){
+        let url = this.apiUrl+'/product/?';
+        if (category_id){
+            url += 'category_id='+category_id;
+        }
+        if (id){
+            url += 'id='+id;
+        }
         return this._http.get(url)
                         .map((res:Response) => res.json())
                         .catch (this.handleError);
     }
     
-
     public UserLogin(email,password){
         let url = this.apiUrl+'/user/login/';
         let data={
@@ -142,6 +155,38 @@ export class AppService {
                         .catch (this.handleError);
     }
 
+    public UserDelete(id){
+        let url = this.apiUrl+'/user/'+id+'/';
+        return this._http.delete(url)
+                        .map((res:Response) => res.json())
+                        .catch (this.handleError);
+    }
+
+
+    public OrderList(status=-1,user=0,wash_man=0,take_man=0,return_man=0){
+        let url = this.apiUrl + '/order/list/?';
+        if (status>-1){
+            url += '&status='+status;
+        }
+        if (user){
+            url += '&user=1';
+        }
+        if (wash_man){
+            url += '&wash_man=1';
+        }
+        if (take_man){
+            url += '&take_man=1';
+        }
+        if (return_man){
+            url += '&return_man=1';
+        }
+        let head = new Headers({'Content-Type': 'application/json'});
+        head.set('Authorization','Token '+localStorage.getItem('token'));
+        return this._http.get(url,{headers: head})
+                        .map((res:Response) => res.json())
+                        .catch (this.handleError);
+    }
+
     public OrderDetail(id){
         let url = this.apiUrl+'/order/'+id+'/';
         let head = new Headers({'Content-Type': 'application/json'});
@@ -151,12 +196,7 @@ export class AppService {
                         .catch (this.handleError);
     }
 
-	public UserDelete(id){
-        let url = this.apiUrl+'/user/'+id+'/';
-		return this._http.delete(url)
-                        .map((res:Response) => res.json())
-                        .catch (this.handleError);
-	}
+
 
     public CityData(){
         let url = this.apiUrl + '/address/city/';
@@ -180,7 +220,7 @@ export class AppService {
     }
 
     public OrderReturning(){
-        let url = this.apiUrl + '/order/bewashed/';
+        let url = this.apiUrl + '/order/washed/';
         return this._http.get(url)
                         .map((res:Response) => res.json())
                         .catch (this.handleError);

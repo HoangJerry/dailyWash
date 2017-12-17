@@ -154,5 +154,7 @@ a, a:hover {
     position: relative;
 }
 .background{
-    background-color: #d8eef9;
+    /*background-color: #9EE0DE;*/
+    /*background: linear-gradient(0deg, #b4e4f5, #7cd3f2);*/
+    background: #b4e4f5;
 }

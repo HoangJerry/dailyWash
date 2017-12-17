@@ -11,7 +11,7 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr *ngFor="let new of news">
+						<tr *ngFor="let new of news" >
 							<td (click)="move(new.id)">{{new.user.first_name}} {{new.user.last_name}}
 							</td>
 						</tr>

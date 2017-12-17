@@ -20,9 +20,9 @@ export class HomeComponent implements OnInit {
 			.subscribe(
 					(res:any) => {
 						this.categories = res.results;
-						// console.log(this.categories);
 						this.categories.forEach((c)=>{
-							this._api.ProductByCategory(c.id)
+							// Get product by category
+							this._api.ProductList(c.id)
 							.subscribe(
 								(res:any) => {
 									c.products = res.results;

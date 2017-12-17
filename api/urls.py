@@ -22,6 +22,7 @@ urlpatterns = [
 	url(r'^order/me/returning/$', views.ReturningPending.as_view(), name='order-taking'),
 	url(r'^order/me/washing/$', views.WashingPending.as_view(), name='order-taking'),
 	url(r'^order/(?P<pk>[0-9]+)/$', views.OrderDetail.as_view(), name='order-taking'),
+	url(r'^order/list/$', views.OrderList.as_view(), name='order-taking'),
 
 	# catagory
 	url(r'^category/$', views.CategoryAPI.as_view(),name='catagories'),

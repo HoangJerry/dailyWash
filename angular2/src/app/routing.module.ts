@@ -12,6 +12,7 @@ import { DashboardMainComponent } from './dashboard-main/dashboard-main.componen
 import { SignupComponent } from './signup/signup.component';
 import { SignupSuccessComponent } from './signup-success/signup-success.component';
 import { ProductDetailComponent } from './product-detail/product-detail.component';
+import { UserHistoryComponent } from './user-history/user-history.component';
 
 import { AuthGuard }              from './app.service';
 
@@ -73,6 +74,11 @@ export const routes: Routes = [
   {
     path: 'order',
     component: UserOrderComponent,
+    canActivate:[AuthGuard]
+  },
+  {
+    path: 'history',
+    component: UserHistoryComponent,
     canActivate:[AuthGuard]
   },
 

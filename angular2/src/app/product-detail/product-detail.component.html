@@ -1,1 +1,17 @@
 <app-header></app-header>
+<div class="main-background" *ngIf="product">
+	<div class="contain container">
+		<div class="row">
+			<div class="col-xs-12 col-sm-6">
+				<div class="border">
+					<img *ngFor="let photo of product.photos" src="{{photo.image}}" alt="photo.id" class="display-photos">
+					
+				</div>
+			</div>
+			<div class="col-xs-12 col-sm-6">
+				<h1>{{product.title}}</h1>
+				<button mat-button (click)="onClickOrder(product)">Order</button>
+			</div>
+		</div>
+	</div>
+</div>

@@ -17,7 +17,7 @@
 			  		<div class="col-md-4 col-sm-4 col-xs-12" *ngFor="let product of products">
 					<div class="ctn-boutiques">
 						<div class="display">
-							<a [routerLink] routerLink="/product/{{product.id}}" *ngIf = "product.photos[0]"><img src="{{product.photos[0].image}}"></a>
+							<a routerLink="/product/{{product.id}}" *ngIf = "product.photos[0]"><img src="{{product.photos[0].image}}"></a>
 						</div>
 						<p>{{product.title}}</p>
 						<h3 style="text-decoration: line-through;">{{product.price}}.000</h3>
@@ -30,7 +30,7 @@
 			 	<div class="col-md-4 col-sm-4 col-xs-12" *ngFor="let product of categorie.products">
 					<div class="ctn-boutiques">
 						<div class="display">
-							<a [routerLink]=''  routerLink="/product/{{product.id}}" *ngIf = "product.photos[0]"><img src="{{product.photos[0].image}}"></a>
+							<a routerLink="/product/{{product.id}}" *ngIf = "product.photos[0]"><img src="{{product.photos[0].image}}"></a>
 						</div>
 						<p>{{product.title}}</p>
 						<h3 style="text-decoration: line-through;">{{product.price}}.000</h3>

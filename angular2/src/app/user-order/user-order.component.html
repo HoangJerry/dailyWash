@@ -1,25 +1,17 @@
 <app-header></app-header>
-<div class="wrapper wrapper-help animated bounceInDown">
+<div class="wrapper-header animated bounceInDown">
 	<div class="bannerContainer">
 		<div class="container">
-			<div class="ctn-banner help-banner">
-				<h3>VERY EASY TO ORDER</h3>
+			<div class="ctn-banner">
+				<h3>EASY TO ORDER</h3>
 			</div>
 		</div>		
 	</div>
 </div>
 
 <div class="answerContainer animated fadeInUp">
-	<!-- Product name -->
-<!-- 	<div class="borderWhite animated rotateIn">
-		
-	</div> -->
-	<div>
-		
-	</div>
 	<div class="container">
 		<h1 class="pro-title">{{this.product.title}}</h1>
-		<div class="row">
 			<mat-form-field>
 			    <input matInput placeholder="First name" value={{user.first_name}} readonly>
 			</mat-form-field>
@@ -42,8 +34,6 @@
 			    </option>
 			    <p>The time we pick your </p>
 			  </select>
-	
 			<button mat-button (click)="onClickOrder()">Order!</button>
-		</div>
 	</div>
 </div>

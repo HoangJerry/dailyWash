@@ -97,6 +97,48 @@ class OrderNew(generics.ListAPIView):
     queryset = Order.objects.filter(status=Order.DELIVERY_STATUS_NEW)
     serializer_class = OrderNewSerializer
 
+class OrderList(generics.ListAPIView):
+    permission_classes = [permissions.IsAuthenticated]
+    queryset = Order.objects.all()
+    serializer_class = OrderNewSerializer
+
+    def get_queryset(self):
+        ret = self.queryset
+        status = int(self.request.GET.get('status',-1))
+        if status>-1:
+            ret = ret.filter(status=status)
+            if status == 0: 
+                self.serializer_class = OrderNewSerializer
+            if status == 10: 
+                self.serializer_class = OrderNewSerializer
+            if status == 20: 
+                self.serializer_class = OrderNewSerializer
+            if status == 30: 
+                self.serializer_class = OrderNewSerializer
+            if status == 40: 
+                self.serializer_class = OrderNewSerializer
+            if status == 50: 
+                self.serializer_class = OrderNewSerializer
+            if status == 60: 
+                self.serializer_class = OrderNewSerializer
+
+        user = int(self.request.GET.get('user',0))
+        if user:
+            ret = ret.filter(user=self.request.user)
+
+        wash_man = int(self.request.GET.get('wash_man',0))
+        if wash_man:
+            ret = ret.filter(wash_man=self.request.user)
+
+        take_man = int(self.request.GET.get('take_man',0))
+        if take_man:
+            ret = ret.filter(take_man=self.request.user)
+
+        return_man = int(self.request.GET.get('return_man',0))
+        if return_man:
+            ret = ret.filter(return_man=self.request.user)
+
+        return ret
 
 class OrderTaking(generics.ListAPIView):
     permission_classes = [permissions.IsAuthenticated]
@@ -151,7 +193,6 @@ class OrderWashing(generics.ListAPIView):
 
 
 class OrderWashed(generics.ListAPIView):
-    permission_classes = [permissions.IsAuthenticated]
     serializer_class = OrderNewSerializer
 
     def post(self, request, format=None):

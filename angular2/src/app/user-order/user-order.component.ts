@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { AppService }        from '../app.service';
-import { Router }	           from '@angular/router';
+import { Router, NavigationEnd }	           from '@angular/router';
 import { OrderType }         from '../data-type/order';
 @Component({
   selector: 'app-user-order',
   templateUrl: './user-order.component.html',
-  styleUrls: ['./user-order.component.css']
+  styleUrls: ['./user-order.component.css'],
 })
 export class UserOrderComponent implements OnInit {
   user = {
@@ -25,7 +25,6 @@ export class UserOrderComponent implements OnInit {
       try {
           this.product = localStorage.getItem('product');
           this.product = JSON.parse(this.product);
-          // localStorage.removeItem('product');
       }
       catch(err) {
           
@@ -43,6 +42,12 @@ export class UserOrderComponent implements OnInit {
   }
 
   ngOnInit() {
+        this._router.events.subscribe((evt) => {
+            if (!(evt instanceof NavigationEnd)) {
+                return;
+            }
+            window.scrollTo(0, 0)
+        });
   }
   onClickOrder(){
     console.log(this.order);

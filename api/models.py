@@ -123,6 +123,9 @@ class Order(models.Model):
             return self.estimete_unit*self.product.price
         return 0
 
+    def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
+        super(Order, self).save(force_insert, force_update, using, update_fields)
+
 class Address(CategoryBase):
 
     def get_absolute_url(self):

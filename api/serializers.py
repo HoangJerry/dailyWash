@@ -8,10 +8,14 @@ class AddressSerializer(serializers.ModelSerializer):
         exclude = ['tree_id','rght','lft']
 
 class UserSignUpSerializer(serializers.ModelSerializer):
+    address = serializers.SerializerMethodField('_address')
+
     class Meta:
         model = User
         fields = ('id', 'email', 'first_name', 'last_name','phone',
-            'city','district','street')
+            'city','district','street','address')
+    def _address(self,obj):
+        return obj.address
 
 class UserBaseSerializer(serializers.ModelSerializer):
     gender = serializers.SerializerMethodField('_gender')
@@ -57,11 +61,24 @@ class ProductSerializer(serializers.ModelSerializer):
     class Meta():
         model = Product
 
-class OrderNewSerializer(serializers.ModelSerializer):
+class OrderSerializer(serializers.ModelSerializer):
+    status = serializers.SerializerMethodField('_status')
+    price = serializers.SerializerMethodField('_price')
+    class Meta():
+        model = Order
+        fields = ('id','status')
+
+    def _status(self, obj):
+        return obj.get_status_display()
+    def _price(self, obj):
+        return obj.total
+
+class OrderNewSerializer(OrderSerializer):
     product = ProductSerializer()
     user = UserSignUpSerializer()
     class Meta():
         model = Order
+        # fields = ('id', 'user', 'product','estimete_unit')
 
 class CatagorySerializer(serializers.ModelSerializer):
     class Meta:

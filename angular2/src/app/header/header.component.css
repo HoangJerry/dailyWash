@@ -12,6 +12,8 @@ p,a{
 	background: rgba(0, 0, 0, 0.48);;
 	overflow: hidden;
 	border-bottom: 1px solid #c8c6c9;
+
+	/*blur*/
 }
 #logo{
 	font-size: 30px;
@@ -50,7 +52,7 @@ p,a{
 	font-weight: 600;
 }
 .headerContainer .navbar ul > li > a:hover{
-	color: #ee3967;
+	color: #fff;
 }
 .navbar .navbar-collapse{}
 .navbar .navbar-collapse >ul>li>a.login{
@@ -61,17 +63,10 @@ p,a{
 }
 .navbar .navbar-collapse >ul>li>a.signup{
 	padding: 10px 70px;
-	border: 1px solid #ee3967;
-	color: #ee3967;
-	border-radius: 30px;
-}
-.navbar .navbar-collapse >ul>li>a.login:hover{
-	color: #ee3967;
-}
-.navbar .navbar-collapse >ul>li>a.signup:hover{
+	border: 1px solid #ff2d55;
 	color: #fff;
-	background: #f42156;
-	border: 1px solid #f42156;
+	border-radius: 30px;
+	background: #ff2d55;
 }
 li>a:hover, li>a:focus{
 	background: none;
@@ -100,8 +95,6 @@ li>a:hover, li>a:focus{
 	}
 	.navbar .navbar-collapse >ul>li>a.signup{
 		padding: 5px 50px;
-		border: 1px solid #ee3967;
-		color: #ee3967;
 		border-radius: 30px;
 	}
 

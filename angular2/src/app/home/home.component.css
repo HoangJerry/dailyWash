@@ -66,7 +66,8 @@
 
 /*partners*/
 .wrapper{
-	padding-top: 50px;
+	padding-top: 100px;
+	padding-bottom: 200px;
 }
 .partners-wrapper{
 	background: url(/assets/jean.jpg/) #fff no-repeat center top;
@@ -76,8 +77,11 @@
 /*Main container*/
 
 .main-container{
-	background-color: #fff;
+	/*linear-gradient(0deg, #b4e4f5, #7cd3f2)*/
+	background-color: #f8fafc;
+	position: relative;
 }
+
 .marginTop100{
 	padding-top: 5vh;
 }
@@ -95,6 +99,9 @@
 .ctn-boutiques .display{
 	height: 35vh;
 	overflow: hidden;
+	padding: 5px;
+	box-sizing: border-box;
+	background-color: #fff;
 }
 .ctn-boutiques a img{
 	width: 100%;
@@ -121,10 +128,29 @@
 }
 
 /*material css*/
+
+.mat-tab-label.mat-ripple{
+    color: #65d9d9 !important;
+	text-decoration: none;
+	opacity: 0.9;
+	font-size: 20px;
+}
+.mat-tab-header, .mat-tab-nav-bar{
+	border-color: #fff;
+	margin-bottom: 15px;
+}
 .mat-tab-group.mat-primary .mat-ink-bar, .mat-tab-nav-bar.mat-primary .mat-ink-bar{
-    background-color: #E91E63;
+    background-color: #7cd3f2;
+    opacity: 1;
 }
 .mat-button, .mat-icon-button, .mat-raised-button{
 	color: white !important;
-    background-color: dimgrey;
+    background-color: #7cd3f2;
+}
+
+@media (max-width: 767px){
+	.wrapper{
+		padding-top: 50px;
+		padding-bottom: 30px;
+	}
 }

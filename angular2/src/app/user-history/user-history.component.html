@@ -1,3 +1,44 @@
-<p>
-  user-history works!
-</p>
+<app-header></app-header>
+<div class="main-background">
+		<div class="header">
+			<h1><i class="material-icons">beenhere</i><br>My Order</h1>
+		</div>
+		<div class="container" *ngIf="histories" >
+			<div class="col-xs-12 item-bg" *ngFor="let history of histories">
+				<div class="top">
+					<div class="row">
+						<div class="col-xs-3">
+							<div class="same-w-h">
+								<img class="img-circle" src="assets/khan.jpg" />
+							</div>
+						</div>
+						<div class="col-xs-9">
+							<h4>{{history.creation_date | date: 'dd/MM/yyyy'}}</h4>
+							<p class="text-color-1">{{history.product.title}}</p>
+						</div>
+					</div>
+				</div><!-- end-top -->
+				<div class="bottom">
+					<div class="row">
+						<div class="col-xs-3 text-left">	
+							<span class="text-color-1">pickup</span>
+							<p class="text-color-2">Now</p>
+						</div>
+						<div class="col-xs-3 text-left">
+							<span class="text-color-1">price</span>
+							<p class="text-color-2">{{history.price}}.000</p>
+							
+						</div>
+						<div class="col-xs-3 text-left">
+							<span class="text-color-1">status</span>
+							<p class="text-color-3">{{history.status}}</p>
+						</div>
+						<!-- <div class="col-xs-3 text-left">
+							<img style="width:100px; height:100px" src="images/sign-img4.jpg" />
+						</div> -->
+					</div>
+				</div><!-- end-bottom -->
+			</div>
+		</div>
+		
+</div>
